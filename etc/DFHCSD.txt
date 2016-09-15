@@ -1,0 +1,3 @@
+ DEFINE BUNDLE(RESTAPP) GROUP(RESTAPP)
+ DESCRIPTION(RESTFUL WEB APP SAMPLE)
+        BUNDLEDIR(/u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0)
