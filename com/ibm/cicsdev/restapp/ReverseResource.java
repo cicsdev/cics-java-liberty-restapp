@@ -93,9 +93,10 @@ public class ReverseResource {
         
         // Upfront declarations
         Channel chan;
-        Container inputContainer, outputContainer;        
+        Container inputContainer; 
+        Container outputContainer;               
         
-        // Clean up the input string
+        // Truncate the input string
         String inputStrTrim = inputStr.trim();
 
         // Create a reference to the Program we will invoke
