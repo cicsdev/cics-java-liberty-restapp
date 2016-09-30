@@ -9,7 +9,7 @@ Sample RESTful web application for deployment to a Liberty JVM server in CICS. T
 The following Java source components are supplied in the src directory in this repository.
 
 ## Java package com.ibm.cicsdev.restapp
-* CICSApplication.java - Sets the ApplicationPath for components in this application
+* CICSApplication.java - Sets the ApplicationPath for resources in this application
 * InfoResource.java - Returns JSON structure using CICSInformation bean
 * ReverseResource.java - Returns JSON structure using ReverseResult bean
 

@@ -31,7 +31,7 @@ import com.ibm.cicsdev.restapp.bean.ReverseResult;
 
 
 /**
- * RESTful web applicaton that links to the CICS COBOL program EDUCHAN
+ * RESTful web application that links to the CICS COBOL program EDUCHAN
  * and returns a reversed input string. 
  */
 @Path("reverse")
@@ -91,13 +91,13 @@ public class ReverseResource {
     @Path("/{text}")
     public ReverseResult reverse(@PathParam("text") String inputStr) {
         
-        // Upfront declarations
+        // Variable declarations
         Channel chan;
         Container inputContainer; 
         Container outputContainer;               
         
         // Truncate the input string
-        String inputStrTrim = inputStr.trim();
+        inputStr = inputStr.trim();
 
         // Create a reference to the Program we will invoke
         Program prog = new Program();
@@ -139,7 +139,7 @@ public class ReverseResource {
 
         try {
             // Trim the input string and add to the response object
-            inputContainer.putString(inputStrTrim);            
+            inputContainer.putString(inputStr);            
         }
         catch (CicsConditionException cce) {
 
@@ -214,7 +214,7 @@ public class ReverseResource {
         ReverseResult result = new ReverseResult();
 
         // Populate with the original string
-        result.setOriginalText(inputStrTrim);
+        result.setOriginalText(inputStr);
 
         // Format the current time to ISO 8601 standards
         Calendar nowUTC = Calendar.getInstance(TimeZone.getTimeZone("Z"));
@@ -224,7 +224,7 @@ public class ReverseResource {
         result.setReverseText(outputStr.trim());
 
         // Was this truncated?
-        result.setTruncated(outputStr.length() < inputStrTrim.length());
+        result.setTruncated(outputStr.length() < inputStr.length());
 
         // Return result object
         return result;
