@@ -31,7 +31,7 @@ The following Java source components are supplied in the src directory in this r
 * Java SE 1.7 or later on the z/OS system
 * Java SE 1.7 or later on the workstation
 * Eclipse with WebSphere Developer Tools and CICS Explorer SDK installed
-* EDUCHAN COBOL program available this [CICSDev Git repository] (https://github.com/cicsdev/cics-java-link).
+* EDUCHAN COBOL program available in this [CICSDev Git repository] (https://github.com/cicsdev/cics-java-link).
 
    
 
