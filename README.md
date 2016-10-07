@@ -31,6 +31,7 @@ The following Java source components are supplied in the src directory in this r
 * Java SE 1.7 or later on the z/OS system
 * Java SE 1.7 or later on the workstation
 * Eclipse with WebSphere Developer Tools and CICS Explorer SDK installed
+* EDUCHAN COBOL program available this [CICSDev Git repository] (https://github.com/cicsdev/cics-java-link).
 
    
 
@@ -86,11 +87,4 @@ This will invoke the ReverseResource class which links to the CICS COBOL program
 This will invoke the ReverseResource class which links to the CICS COBOL program reversing the input string "ilovecics" as follows:
 
 {"time":"2016-09-09T16:15:32.466Z","original":"ilovecics","reverse":"scicevoli","truncated":false}
-
-
-
-
-## Reference
-
-* To download the COBOL EDUCHAN sample for usage with this application see this [CICSDev Git repository] (https://github.com/cicsdev/cics-java-link).
 
