@@ -31,7 +31,6 @@ The following Java source components are supplied in the src directory in this r
 * Java SE 1.7 or later on the z/OS system
 * Java SE 1.7 or later on the workstation
 * Eclipse with WebSphere Developer Tools and CICS Explorer SDK installed
-* EDUCHAN COBOL program available in this [CICSDev Git repository] (https://github.com/cicsdev/cics-java-link).
 
    
 
@@ -60,7 +59,7 @@ a CICS bundle project.
 1. Using the CICS Explorer export the CICS bundle project to a zFS directory. The samples use the directory /u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0.
 1. Create a CICS BUNDLE definition referencing the zFS directory created in step 1.
 1. Install the CICS BUNDLE resource.
-1. Download and compile the COBOL program EDUCHAN and deploy into CICS.
+1. Download and compile the supplied COBOL program EDUCHAN and deploy into CICS.
 
 **Note:** sample DFHCSDUP EXTRACT output for the required CICS resource definitions is supplied in the supporting file DFHCSD.txt file.  
 
