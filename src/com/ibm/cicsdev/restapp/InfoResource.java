@@ -40,8 +40,8 @@ public class InfoResource {
         CICSEnvironment env = new CICSEnvironment();
 
         // Initialise with system property values
-        env.setProd(System.getProperty("com.ibm.cics.jvmserver.cics.product.name"));
-        env.setCicsVer(System.getProperty("com.ibm.cics.jvmserver.cics.product.version"));
+        env.setProd(System.getProperty("com.ibm.cics.jvmserver.cics.product.name", "Not available prior to V5.3"));
+        env.setCicsVer(System.getProperty("com.ibm.cics.jvmserver.cics.product.version", "Not available prior to V5.3"));
 
         // Establish the CICS information bean
         CICSInformation info = new CICSInformation();
