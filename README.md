@@ -22,7 +22,7 @@ The following Java source components are supplied in the src/Java directory in t
 
 ## Supporting files
 * etc/DFHCSD.txt - Output from a DFHCSDUP EXTRACT for the CICS BUNDLE resource definition.
-* Cobol/EDUCHAN.cbl - A sample CICS COBOL that returns the date and time and reversed input using channels and containers
+* src/Cobol/EDUCHAN.cbl - A sample CICS COBOL that returns the date and time and reversed input using channels and containers
 
 
 ## Pre-reqs
