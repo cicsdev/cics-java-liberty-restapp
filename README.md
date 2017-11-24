@@ -4,7 +4,7 @@ cics-java-liberty-restapp
 Sample RESTful web application for deployment to a Liberty JVM server in CICS. The application is supplied with two resources:
 
 1. `InfoResource` - This queries the JVM server environment using system properties and uses JAXB beans to return a JSON response detailing the CICS environment.
-1. `ReverseResource` - This is similar to `InfoResource`, but uses the JCICS API to link to the COBOL program EDUCHAN using channels and containers. An input string is passed to `EDUCHAN`, which is then reversed and returned, along with the time from CICS. 
+1. `ReverseResource` - This is similar to `InfoResource`, but uses the JCICS API to link to the COBOL program `EDUCHAN` using channels and containers. An input string is passed to `EDUCHAN`, which is then reversed and returned, along with the time from CICS. 
 
 The following Java source components are supplied in the [`src/Java`](src/Java) directory in this repository.
 
