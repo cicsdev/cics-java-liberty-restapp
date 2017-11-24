@@ -3,21 +3,21 @@ cics-java-liberty-restapp
 
 Sample RESTful web application for deployment to a Liberty JVM server in CICS. The application is supplied with two resources:
 
-1. InfoResource - This queries the JVM server environment using system properties and uses JAXB beans to return a JSON response detailing the CICS environment.
-1. ReverseResource - This is similar to InfoResource, but uses the JCICS API to link to the COBOL program EDUCHAN using channels and containers. An input string is passed to EDUCHAN, which is then reversed and returned, along with the time from CICS. 
+1. `InfoResource` - This queries the JVM server environment using system properties and uses JAXB beans to return a JSON response detailing the CICS environment.
+1. `ReverseResource` - This is similar to `InfoResource`, but uses the JCICS API to link to the COBOL program EDUCHAN using channels and containers. An input string is passed to `EDUCHAN`, which is then reversed and returned, along with the time from CICS. 
 
-The following Java source components are supplied in the src/Java directory in this repository.
+The following Java source components are supplied in the [`src/Java`](src/Java) directory in this repository.
 
 ## Java package com.ibm.cicsdev.restapp
-* [`CICSApplication`](src/Java/com/ibm/cicsdev/restapp/CICSApplication.java) - Sets the ApplicationPath for resources in this application
-* [`InfoResource`](src/Java/com/ibm/cicsdev/restapp/InfoResource.java) - Returns JSON structure using CICSInformation bean
-* [`ReverseResource`](src/Java/com/ibm/cicsdev/restapp/ReverseResource.java) - Returns JSON structure using ReverseResult bean
+* [`CICSApplication`](src/Java/com/ibm/cicsdev/restapp/CICSApplication.java) - Sets the `ApplicationPath` for resources in this application
+* [`InfoResource`](src/Java/com/ibm/cicsdev/restapp/InfoResource.java) - Returns JSON structure using `CICSInformation` bean
+* [`ReverseResource`](src/Java/com/ibm/cicsdev/restapp/ReverseResource.java) - Returns JSON structure using `ReverseResult` bean
 
 
 ## Java package com.ibm.cicsdev.restapp.bean
 * [`CICSEnvironment`](src/Java/com/ibm/cicsdev/restapp/bean/CICSEnvironment.java) - JAXB bean returning JSON structure containing information about CICS product and version
-* [`CICSInformation`](src/Java/com/ibm/cicsdev/restapp/bean/CICSInformation.java) - JAXB bean returning JSON structure containing CICS applid, time and JVM server name and instance of CICSEnvironment
-* [`ReverseResult`](src/Java/com/ibm/cicsdev/restapp/bean/ReverseResult.java) - JAXB bean returning JSON structure containg input and output containers sent to EDUCHAN COBOL program
+* [`CICSInformation`](src/Java/com/ibm/cicsdev/restapp/bean/CICSInformation.java) - JAXB bean returning JSON structure containing CICS applid, time and JVM server name and instance of `CICSEnvironment`
+* [`ReverseResult`](src/Java/com/ibm/cicsdev/restapp/bean/ReverseResult.java) - JAXB bean returning JSON structure containg input and output containers sent to `EDUCHAN` COBOL program
 
 
 ## Supporting files
