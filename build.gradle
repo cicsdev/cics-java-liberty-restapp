@@ -1,0 +1,44 @@
+plugins
+{
+id 'java'
+id 'eclipse'
+id 'idea'
+id 'war'
+}
+
+group = 'com.ibm.cicsdev.restap'
+archivesBaseName='cics-java-liberty-restapp'
+version = '0.1.0'
+sourceCompatibility = '1.8'
+
+apply plugin: 'war'
+
+// If in Eclipse, add Javadoc to the local project classpath
+eclipse 
+{
+    classpath 
+    {
+        downloadJavadoc = true
+    }
+}
+
+
+repositories 
+{
+    mavenCentral()
+}
+
+
+dependencies 
+{      
+    // CICS TS V5.5 Maven BOM (as of 19th May 2020)
+    compileOnly enforcedPlatform("com.ibm.cics:com.ibm.cics.ts.bom:5.5-20200519131930-PH25409")
+
+    // Don't include JCICS in the final build (no need for version because we have BOM)
+    compileOnly("com.ibm.cics:com.ibm.cics.server") 
+
+    // Compile against, but don't include JAXRS in the final build 
+    // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api   
+    compileOnly ("javax.ws.rs:javax.ws.rs-api:2.0")
+    
+}
