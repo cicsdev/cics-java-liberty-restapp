@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<!-- Application properties -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.cicsdev.restapp</groupId>
+	<artifactId>cics-java-liberty-restapp</artifactId>
+	<name>cics-java-liberty-restapp</name>
+	<version>0.1.0</version>
+	<packaging>war</packaging>
+	<description>description</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<!-- CICS TS V5.5 BOM (as of May 2020) -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.ibm.cics</groupId>
+				<artifactId>com.ibm.cics.ts.bom</artifactId>
+				<version>5.5-20200519131930-PH25409</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- Compile against, but don't include JCICS in the final build (version 
+			and scope are from BOM) -->
+		<dependency>
+			<groupId>com.ibm.cics</groupId>
+			<artifactId>com.ibm.cics.server</artifactId>
+		</dependency>
+
+        
+		<!-- Compile against, but don't include JAXRS in the final build -->
+		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>

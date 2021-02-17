@@ -23,6 +23,8 @@ The following Java source components are supplied in the [`src/Java`](src/Java) 
 ## Supporting files
 * [`DFHCSD.txt`](etc/DFHCSD.txt) - Output from a DFHCSDUP EXTRACT for the CICS BUNDLE resource definition.
 * [`EDUCHAN.cbl`](src/Cobol/EDUCHAN.cbl) - A sample CICS COBOL that returns the date and time and reversed input using channels and containers
+* [`build.gradle`](build.gradle) - A sample Gradle build file to enable an automated build of the deployable WAR
+* [`pom.xml`](pom.xml) - A sample Maven build file to enable an automated build of the deployable WAR
 
 
 ## Pre-reqs
@@ -52,7 +54,7 @@ a CICS bundle project.
 1. Enable Java support in the CICS region by adding the `SDFJAUTH` library to the `STEPLIB` concatenation and setting `USSHOME` and the `JVMPROFILEDIR` SIT parameters.
 1. Define a Liberty JVM server called `DFHWLP` using the supplied sample definition `DFHWLP` in the CSD group `DFH$WLP`.
 1. Copy the CICS sample `DFHWLP.jvmprofile` zFS file to the `JVMPROFILEDIR` directory specified above and ensure the `JAVA_HOME` variable is set correctly.
-1. Add the `jaxrs-1.1` Liberty feature to `server.xml`.
+1. Add the `jaxrs-1.1` or `jaxrs-2.0` Liberty feature to `server.xml` depending on your version of Java EE.
 1. Install the `DFHWLP` resource defined in step 2 and ensure it becomes enabled.
 
 ### To deploy the samples into a CICS region:
