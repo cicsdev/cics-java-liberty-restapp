@@ -30,9 +30,9 @@ The following Java source components are supplied in the [`src/Java`](src/Java) 
 ## Pre-reqs
 
 * CICS TS V5.1 or later, due to the usage of the `getString()` methods.
-* Java SE 1.7 or later on the z/OS system
-* Java SE 1.7 or later on the workstation
-* Eclipse with WebSphere Developer Tools and CICS Explorer SDK installed
+* Java SE 1.8 on the z/OS system
+* Java SE 1.8 on the workstation
+* Eclipse with the IBM CICS SDK for Java EE, Jakarta EE and Liberty, or any IDE that supports usage of the Maven Central artifact [com.ibm.cics:com.ibm.cics.server.](https://search.maven.org/artifact/com.ibm.cics/com.ibm.cics.server) 
 
    
 
