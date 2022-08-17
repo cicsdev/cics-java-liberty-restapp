@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.argoAppName }}
+  labels:
+    app: {{ .Values.argoAppName }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: {{ .Values.argoAppName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.argoAppName }}
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      containers:
+      - name: {{ .Values.argoAppName }}
+        image: {{ .Values.containerRegistry }}/{{ .Values.dockerImageName }}:{{ .Values.containerImageTag }}
+        imagePullPolicy: Always
+        env:
+        - name: CONTEXTROOT
+          value: {{ .Values.baseUrlPath }}/{{ .Values.containerImageTag }}
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            memory: 50Mi

@@ -4,6 +4,7 @@ id 'java'
 id 'eclipse'
 id 'idea'
 id 'war'
+	id 'maven-publish'
 }
 
 group = 'com.ibm.cicsdev.restap'
@@ -41,4 +42,33 @@ dependencies
     // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api   
     compileOnly ("javax.ws.rs:javax.ws.rs-api:2.0")
     
+}
+
+
+
+publishing {
+    publications {
+    	// Publication for JCICS
+        maven(MavenPublication) {
+            groupId "${group}"
+            version "${version}"
+            artifactId "${archivesBaseName}" 
+            artifact bootWar
+        }
+    }
+    
+    // Configure the Maven repository to publish to somewhere which is configurable
+    // with environment variables from outside gradle.
+    //
+    // For example:
+    //   gradle build publish \
+    //   -Ppublish_repo_releases_url="file://my-folder" \
+    //   -Ppublish_repo_releases_name="my-maven-repo"
+    //
+    repositories {
+        maven {
+            url = "${publish_repo_releases_url}/${publish_repo_releases_name}"
+        }
+    }
+
 }

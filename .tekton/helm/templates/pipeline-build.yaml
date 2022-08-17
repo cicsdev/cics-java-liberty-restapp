@@ -1,0 +1,432 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+# description: |
+#   This pipeline is executed whenever a something in a branch needs to be (re-) built.
+
+metadata:
+  name: {{ .Values.argoAppName }}-build
+#
+# 
+#
+spec:
+  #
+  #
+  #
+  workspaces:
+    - name: git-workspace
+  #
+  #
+  #
+  params:
+    - name: containerImageTag
+      type: string
+    - name: gitBranch
+      type: string
+    - name: gitRevision
+      type: string
+    - name: gitRepoName
+      type: string
+    - name: gitRepoFullName
+      type: string
+    - name: gitHubOrg
+      type: string
+      default: {{ .Values.gitHubOrg }}
+      description: |
+        The name of the github organisation this repo is owned by.
+    - name: gitHubHost
+      type: string
+      default: {{ .Values.gitHubHost }}
+      description: |
+        The github host name. eg: github.com or github.ibm.com
+        The value of this depends on where the repo exists.
+    - name: noPush
+      type: string
+      default: ""
+      description: |
+        Decides whether the built docker image is pushed to the docker repo or not.
+        Default is to push, unless “--no-push” is used.
+    - name: containerRegistry
+      type: string
+    - name: buildType
+      type: string
+    - name: pullReqNumber
+      type: string
+
+  #
+  #
+  #
+  tasks:
+    # # Invoke the central sub-pipeline
+    # - name: build-maven-gradle
+    #   taskRef:
+    #     apiVersion: tekton.dev/v1beta1
+    #     kind: Pipeline
+    #     name: samples-maven-gradle-build
+    #   params:
+    #     - name: containerImageTag
+    #       value: $(params.containerImageTag)
+    #     - name: gitBranch
+    #       value: $(params.gitBranch)
+    #     - name: gitRevision
+    #       value: $(params.gitRevision)
+    #     - name: gitRepoName
+    #       value: $(params.gitRepoName)
+    #     - name: gitRepoFullName
+    #       value: $(params.gitRepoFullName)
+    #     - name: gitHubOrg
+    #       value: $(params.gitHubOrg)
+    #     - name: gitHubHost
+    #       value: $(params.gitHubHost)
+    #     - name: containerRegistry
+    #       value: $(params.containerRegistry)
+    #     - name: buildType
+    #       value: $(params.buildType)
+    #     - name: pullReqNumber
+    #       value: $(params.pullReqNumber)
+    #     - name: argoAppName
+    #       value: {{ .Values.argoAppName }}
+    #     - name: buildOutputBaseUrlPath
+    #       value: {{ .Values.baseUrlPath }}
+
+
+    # - name: notify-of-build-starting
+    #   taskRef:
+    #     apiVersion: tekton.dev/v1beta1
+    #     kind: Pipeline
+    #     name: notify-status
+    #   params:
+    #     - name: containerImageTag
+    #       value: $(params.containerImageTag)
+    #     - name: gitBranch
+    #       value: $(params.gitBranch)
+    #     - name: gitRevision
+    #       value: $(params.gitRevision)
+    #     - name: gitRepoName
+    #       value: $(params.gitRepoName)
+    #     - name: gitRepoFullName
+    #       value: $(params.gitRepoFullName)
+    #     - name: containerRegistry
+    #       value: $(params.containerRegistry)
+    #     - name: buildType
+    #       value: $(params.buildType)
+    #     - name: pullReqNumber
+    #       value: $(params.pullReqNumber)
+
+    - name: send-building-status-to-github
+      taskRef:
+        kind: Task
+        name: task-send-status-to-github-enterprise
+      params:
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+        - name: gitHubHost
+          value: $(params.gitHubHost)
+        - name: buildType
+          value: $(params.buildType)
+        - name: gitRevision
+          value: $(params.gitRevision)
+        - name: gitRepoName
+          value: $(params.gitRepoName)
+        - name: gitRepoFullName
+          value: $(params.gitRepoFullName)
+        - name: pullReqNumber
+          value: $(params.pullReqNumber)
+        - name: buildStatus
+          value: "pending"
+        - name: statusComment
+          value: "building..."
+
+    - name: send-building-status-to-slack
+      taskRef:
+        kind: Task
+        name: task-notify-slack
+      params:
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+        - name: gitRepoName
+          value: $(params.gitRepoName)
+        - name: messageText
+          value: |
+            Repository $(params.gitRepoName) revision $(params.gitRevision) is building...
+
+
+    # #
+    # # Clone the build infrastructure repo into our workspace.
+    # #
+    # - name: clone-build-infrastructure-repo
+    #   taskRef:
+    #     kind: Task
+    #     name: git-clone
+    #   runAfter:
+    #     - send-building-status-to-github
+    #   params:
+    #     - name: url
+    #       value: git@$(params.gitHubHost):$(params.gitHubOrg)/samples-build-infrastructure.git
+    #     - name: revision
+    #       value: main # Always the main branch
+    #     - name: depth
+    #       value: "1"
+    #     - name: subdirectory
+    #       value: samples-build-infrastructure
+    #   workspaces:
+    #     - name: output
+    #       workspace: git-workspace
+
+    #
+    # Clone the sample repo source code into our workspace.
+    #
+    - name: clone-sample-repo
+      taskRef:
+        kind: Task
+        name: git-clone
+      runAfter:
+        - send-building-status-to-github
+        - send-building-status-to-slack
+        # - notify-status
+      params:
+        - name: url
+          value: {{ .Values.gitHubCloneUrl }}
+        - name: revision
+          value: $(params.gitRevision)
+        - name: depth
+          value: "50"
+        - name: subdirectory
+          value: $(params.gitRepoName)
+      workspaces:
+        - name: output
+          workspace: git-workspace
+
+    
+
+    #
+    # Build using open jdk 1.8 using maven
+    #
+    - name: build-maven-openjdk-8
+      taskRef:
+        kind: Task
+        name: task-samples-jcics-maven
+      runAfter:
+        - clone-sample-repo
+      params:
+        - name: gitSubDir
+          value: $(params.gitRepoName)
+        - name: mavenImageTag
+          value: 3.8.5-openjdk-8
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+      workspaces:
+        - name: git-workspace
+          workspace: git-workspace
+
+    #
+    # Build using ibm semeru jdk 11 using maven
+    #
+    - name: build-maven-ibm-semeru-11
+      taskRef:
+        kind: Task
+        name: task-samples-jcics-maven
+      runAfter:
+        - clone-sample-repo
+      params:
+        - name: gitSubDir
+          value: $(params.gitRepoName)
+        - name: mavenImageTag
+          value: 3.8.6-ibm-semeru-11-focal
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+      workspaces:
+        - name: git-workspace
+          workspace: git-workspace
+
+    #
+    # Build using ibm semeru jdk 17 using maven
+    #
+    - name: build-maven-ibm-semeru-17
+      taskRef:
+        kind: Task
+        name: task-samples-jcics-maven
+      runAfter:
+        - clone-sample-repo
+      params:
+        - name: gitSubDir
+          value: $(params.gitRepoName)
+        - name: mavenImageTag
+          value: 3.8.6-ibm-semeru-17-focal
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+      workspaces:
+        - name: git-workspace
+          workspace: git-workspace
+
+    #
+    # Build using open jdk 1.8 using gradle
+    #
+    - name: build-gradle-openjdk-1-8
+      taskRef:
+        kind: Task
+        name: task-samples-jcics-gradle
+      runAfter:
+        - clone-sample-repo
+      params:
+        - name: gitSubDir
+          value: $(params.gitRepoName)
+        - name: gradleImageTag
+          value: 7.4.2-jdk8
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+      workspaces:
+        - name: git-workspace
+          workspace: git-workspace
+
+    #
+    # Build using jdk 11 using gradle
+    #
+    - name: build-gradle-jdk-11
+      taskRef:
+        kind: Task
+        name: task-samples-jcics-gradle
+      runAfter:
+        - clone-sample-repo
+      params:
+        - name: gitSubDir
+          value: $(params.gitRepoName)
+        - name: gradleImageTag
+          value: 7.4.2-jdk11
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+      workspaces:
+        - name: git-workspace
+          workspace: git-workspace
+
+    #
+    # Build using jdk 17 using gradle
+    #
+    - name: build-gradle-jdk-17
+      taskRef:
+        kind: Task
+        name: task-samples-jcics-gradle
+      runAfter:
+        - clone-sample-repo
+      params:
+        - name: gitSubDir
+          value: $(params.gitRepoName)
+        - name: gradleImageTag
+          value: 7.4.2-jdk17
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+      workspaces:
+        - name: git-workspace
+          workspace: git-workspace
+
+    #
+    # Stamp the git hash into the image so we can tell what level of source built the artifacts.
+    #
+    - name: gather-build-report
+      taskRef:
+        kind: Task
+        name: task-create-build-report
+      runAfter:
+        - clone-sample-repo
+      workspaces:
+        - name: git-workspace
+          workspace: git-workspace
+
+      params:
+        - name: url
+          value: {{ .Values.gitHubCloneUrl }}
+        - name: revision
+          value: $(params.gitRevision)
+        - name: repoName
+          value: $(params.gitRepoName)
+        - name: gitSubDir
+          value: $(params.gitRepoName)
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+
+  #
+  # Whatever happens to the build above, we want to expose what was/wasn't built to the caller.
+  #
+  # Finally tasks run in series, only after the status of all normal tasks have been settled.
+  #
+  finally:
+    # Finally tasks all happen in parallel, and you can't control the order.
+
+    #
+    # Build a docker image which contains the artifacts published by the
+    # build tasks above.
+    #
+    # The build logs and built artifacts are gathered
+    # The build status 'badge' svg is added
+    # The docker image is created
+    # The docker image is pushed to the container repository
+    # The deployment is refreshed to pick up the new docker image.
+    #
+    - name: build-artifact-server-image
+      taskRef:
+        kind: Task
+        name: task-artifact-server-builder
+      workspaces:
+        - name: git-workspace
+          workspace: git-workspace
+      params:
+        - name: imageName
+          value: $(params.gitRepoName)
+        - name: gitBranch
+          value: $(params.gitBranch)
+        - name: imageTag
+          value: $(params.containerImageTag)
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+        - name: aggregateTasksStatus
+          value: $(tasks.status)
+        - name: deploymentName
+          value: {{ .Values.argoAppName }}
+        - name: workingDir
+          value: /workspace/git/$(params.gitRepoName)
+        - name: dockerFile
+          value: $(params.gitRepoName)/.tekton/resources/artifact-server/Dockerfile
+        - name: gitRepoName
+          value: $(params.gitRepoName)
+
+    # 
+    # Send slack the final status message.
+    #
+    - name: send-built-status-to-slack
+      taskRef:
+        kind: Task
+        name: task-notify-slack
+      params:
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+        - name: gitRepoName
+          value: $(params.gitRepoName)
+        - name: messageText
+          value: |
+            Repository $(params.gitRepoName) revision $(params.gitRevision) build complete. $(tasks.status)
+            Build output is (or will be) available at https://javadev-cicsk8s.hursley.ibm.com/{{ .Values.baseUrlPath }}/{{ .Values.containerImageTag }}
+
+    - name: send-end-state-to-github
+      taskRef:
+        kind: Task
+        name: task-send-status-to-github-enterprise
+      params:
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+        - name: gitHubHost
+          value: $(params.gitHubHost)
+        - name: buildType
+          value: $(params.buildType)
+        - name: gitRevision
+          value: $(params.gitRevision)
+        - name: gitRepoName
+          value: $(params.gitRepoName)
+        - name: gitRepoFullName
+          value: $(params.gitRepoFullName)
+        - name: pullReqNumber
+          value: $(params.pullReqNumber)
+        - name: buildStatus
+          value: $(tasks.status)
+        - name: statusComment
+          value: "completed"
+
+

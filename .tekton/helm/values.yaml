@@ -1,0 +1,56 @@
+
+
+##################################################################################
+###
+### Properties which need changing depending on the repository you are setting up
+###
+##################################################################################
+
+# No properties need customisation
+
+##################################################################################
+###
+### Properties which don't need changing manually.
+###
+##################################################################################
+# When the build process is enabled for the repo, these get set to standard
+# values which can then be used within the customized build process for this 
+# repo
+
+# The git branch we are serving up built artifacts for.
+gitBranch: ignore-value-set-when-build-process-enabled
+
+# The base name for kube resources to make them small enough.
+argoAppName: ignore-value-set-when-build-process-enabled
+
+# The organisation which owns this repository.
+# For example: cicsdev for published examples on github.ibm.com
+gitHubOrg: ignore-value-set-when-build-process-enabled
+
+# The host name of the github site where this source code is stored.
+# For example: github.com for public github.
+gitHubHost: ignore-value-set-when-build-process-enabled
+
+# The name of the git repository
+gitRepoName: ignore-value-set-when-build-process-enabled
+
+# Projects on GHE use this syntax to clone a repo:
+# gitHubCloneUrl: git@$(params.gitHubHost):$(params.gitHubOrg)/$(params.gitRepoName).git
+# Projects on public github use this syntax to clone a repo:
+# gitHubCloneUrl: https://$(params.gitHubHost)/$(params.gitHubOrg)/$(params.gitRepoName).git
+gitHubCloneUrl: ignore-value-set-when-build-process-enabled
+
+# The docker registry we draw images from.
+# Don't change this value unless you want the build process to draw docker images 
+# from a different container image registry
+containerRegistry: harbor-cicsk8s.hursley.ibm.com
+
+# The tag used at the end of the container image full name.
+containerImageTag: ignore-value-set-when-build-process-enabled
+
+# The path of the docker image into our docker registry.
+dockerImageName: ignore-value-set-when-build-process-enabled
+
+# The URL for the application is of the form: baseUrlPath/gitBranchName
+# This controls where you need to look for build output.
+baseUrlPath: ignore-value-set-when-build-process-enabled

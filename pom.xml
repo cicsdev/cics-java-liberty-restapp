@@ -47,4 +47,24 @@
 		</dependency>
 	</dependencies>
 
+    <!-- 
+    Publishes artifacts to here if the deploy goal is used. 
+
+    The values here can be passed on the maven command line
+    using the -D flag syntax 
+  
+    for example:
+    -Dpublish_repo_snapshots_name=my-repo 
+    -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>${publish_repo_snapshots_name}</id>
+            <url>${publish_repo_snapshots_url}</url>
+        </snapshotRepository>
+        <repository>
+            <id>${publish_repo_releases_name}</id>
+            <url>${publish_repo_releases_url}</url>
+        </repository>
+    </distributionManagement>
+
 </project>

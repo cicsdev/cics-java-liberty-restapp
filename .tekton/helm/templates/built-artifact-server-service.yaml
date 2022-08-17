@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.argoAppName }}
+  labels:
+    app: {{ .Values.argoAppName }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.argoAppName }}
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP

@@ -1,0 +1,93 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+# description: |
+#   This pipeline is executed whenever a new release is created and published.
+metadata:
+  name: {{ .Values.argoAppName }}-publish
+#
+#
+#
+spec:
+  #
+  #
+  #
+  workspaces:
+    - name: git-workspace
+  #
+  #
+  #
+  params:
+    - name: gitRevision
+      type: string
+    - name: gitRepoName
+      type: string
+    - name: gitRepoFullName
+      type: string
+    - name: containerRegistry
+      type: string
+    - name: gitTagName
+      type: string
+
+
+  #
+  #
+  #
+  tasks:
+
+    - name: send-publish-starting-to-slack
+      taskRef:
+        kind: Task
+        name: task-notify-slack
+      params:
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+        - name: gitRepoName
+          value: $(params.gitRepoName)
+        - name: messageText
+          value: |
+            Repository $(params.gitRepoName) tag $(params.gitTagName) is being publiished to public github...
+
+    #
+    # Clone the sample repo source code into our workspace.
+    #
+    - name: clone-sample-repo
+      taskRef:
+        kind: Task
+        name: git-clone
+      params:
+        - name: url
+          value: git@{{ .Values.gitHubHost }}:{{ .Values.gitHubOrg }}/$(params.gitRepoName).git
+        - name: revision
+          value: $(params.gitTagName)
+        - name: depth
+          value: "99999999"
+        - name: subdirectory
+          value: $(params.gitRepoName)
+        - name: refspec
+          value: +refs/tags/$(params.gitTagName):refs/tags/$(params.gitTagName)
+      workspaces:
+        - name: output
+          workspace: git-workspace
+
+      # Currently we do nothing more.
+
+  finally:
+    - name: send-publish-result-to-slack
+      taskRef:
+        kind: Task
+        name: task-notify-slack
+      params:
+        - name: containerRegistry
+          value: $(params.containerRegistry)
+        - name: gitRepoName
+          value: $(params.gitRepoName)
+        - name: messageText
+          value: |
+            Repository $(params.gitRepoName) tag $(params.gitTagName) publishing to public github is complete. $(tasks.status)
+
+
+
+
+
+
+
