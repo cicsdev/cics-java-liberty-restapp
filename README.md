@@ -51,7 +51,7 @@ a CICS bundle project.
 
 ### To start a JVM server in CICS:
 1. Enable Java support in the CICS region by adding the `SDFJAUTH` library to the `STEPLIB` concatenation and setting `USSHOME` and the `JVMPROFILEDIR` SIT parameters.
-    1. This step is **not** required if using CICS 5.5 or later
+    * This step is **not** required if using CICS 5.5 or later
 1. Define a Liberty JVM server called `DFHWLP` using the supplied sample definition `DFHWLP` in the CSD group `DFH$WLP`.
 1. Copy the CICS sample `DFHWLP.jvmprofile` zFS file to the `JVMPROFILEDIR` directory specified above and ensure the `JAVA_HOME` variable is set correctly.
 1. Add the `jaxrs-1.1` or `jaxrs-2.0` Liberty feature to `server.xml` depending on your version of Java EE.
