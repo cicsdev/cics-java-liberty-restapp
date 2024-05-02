@@ -67,7 +67,7 @@ a CICS bundle project.
 
 **Note:** sample DFHCSDUP EXTRACT output for the required CICS resource definitions is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
 
-#### Building the Example
+### Building the Example
 
 The sample can be built using the supplied Gradle or Maven build files to produce a WAR file and optionally a CICS Bundle archive.
 
@@ -77,9 +77,9 @@ Run the following in a local command prompt:
 
 `gradle clean build`
 
-This creates a WAR file inside the build/libs directory and a CICS bundle ZIP file inside the `build/distributions` directory.
+This creates a WAR file inside the `build/libs` directory and a CICS bundle ZIP file inside the `build/distributions` directory.
 
-If using the CICS bundle ZIP, the JVM server the CICS bundle is targeted at should be modified in the defaultJVMServer property to match the CICS JVMSERVER resource name.
+If using the CICS bundle ZIP, the JVM server the CICS bundle is targeted at should be modified in the `defaultJVMServer` property in the gradle build [file](build.gradle) to match the CICS JVMSERVER resource name.
 
 
 #### Maven (command line)
@@ -90,7 +90,7 @@ Run the following in a local command prompt:
 
 This creates a WAR file and a CICS bundle zIP file inside the `target` directory.
 
-If using the CICS bundle ZIP, the JVM server the CICS bundle is targeted at should be modified in the <jvmserver> property to match the CICS JVMSERVER resource name.
+If using the CICS bundle ZIP, the JVM server the CICS bundle is targeted at should be modified in the <jvmserver> property in the [`pom.xml`](pom.xml) to match the CICS JVMSERVER resource name.
 
 
 
