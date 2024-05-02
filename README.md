@@ -48,25 +48,6 @@ a CICS bundle project.
 1. Ensure the web project is targeted to compile at a level that is compatible with the Java level being used on CICS. This can be achieved by editing the Java Project Facet in the project properties.
 1. Create a CICS bundle project called `com.ibm.cicsdev.restapp.cicsbundle` and add a dynamic web project include for the project created in step 1.
 
-
-### To start a JVM server in CICS:
-1. Enable Java support in the CICS region by adding the `SDFJAUTH` library to the `STEPLIB` concatenation and setting `USSHOME` and the `JVMPROFILEDIR` SIT parameters.
-    * This step is **not** required if using CICS 5.5 or later
-1. Define a Liberty JVM server called `DFHWLP` using the supplied sample definition `DFHWLP` in the CSD group `DFH$WLP`.
-1. Copy the CICS sample `DFHWLP.jvmprofile` zFS file to the `JVMPROFILEDIR` directory specified above and ensure the `JAVA_HOME` variable is set correctly.
-1. Add the `jaxrs-1.1` or `jaxrs-2.0` Liberty feature to `server.xml` depending on your version of Java EE.
-1. Install the `DFHWLP` resource defined in step 2 and ensure it becomes enabled.
-
-
-### To deploy the samples into a CICS region:
-1. Using the CICS Explorer export the CICS bundle project to a zFS directory. The samples use the directory `/u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
-1. Create a CICS BUNDLE definition referencing the zFS directory created in step 1.
-1. Install the CICS BUNDLE resource.
-1. Download and compile the supplied COBOL program `EDUCHAN` and deploy into CICS.
-
-
-**Note:** sample DFHCSDUP EXTRACT output for the required CICS resource definitions is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
-
 ### Building the Example
 
 The sample can be built using the supplied Gradle or Maven build files to produce a WAR file and optionally a CICS Bundle archive.
@@ -92,6 +73,25 @@ This creates a WAR file and a CICS bundle zIP file inside the `target` directory
 
 If using the CICS bundle ZIP, the JVM server the CICS bundle is targeted at should be modified in the <jvmserver> property in the [`pom.xml`](pom.xml) to match the CICS JVMSERVER resource name.
 
+
+
+### To start a JVM server in CICS:
+1. Enable Java support in the CICS region by adding the `SDFJAUTH` library to the `STEPLIB` concatenation and setting `USSHOME` and the `JVMPROFILEDIR` SIT parameters.
+    * This step is **not** required if using CICS 5.5 or later
+1. Define a Liberty JVM server called `DFHWLP` using the supplied sample definition `DFHWLP` in the CSD group `DFH$WLP`.
+1. Copy the CICS sample `DFHWLP.jvmprofile` zFS file to the `JVMPROFILEDIR` directory specified above and ensure the `JAVA_HOME` variable is set correctly.
+1. Add the `jaxrs-1.1` or `jaxrs-2.0` Liberty feature to `server.xml` depending on your version of Java EE.
+1. Install the `DFHWLP` resource defined in step 2 and ensure it becomes enabled.
+
+
+### To deploy the samples into a CICS region:
+1. Using the CICS Explorer export the CICS bundle project to a zFS directory. The samples use the directory `/u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
+1. Create a CICS BUNDLE definition referencing the zFS directory created in step 1.
+1. Install the CICS BUNDLE resource.
+1. Download and compile the supplied COBOL program `EDUCHAN` and deploy into CICS.
+
+
+**Note:** sample DFHCSDUP EXTRACT output for the required CICS resource definitions is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
 
 
 ### Running the Example
