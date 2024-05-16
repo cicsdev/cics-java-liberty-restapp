@@ -1,15 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Application properties -->
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.ibm.cicsdev.restapp</groupId>
+	<groupId>com.ibm.cicsdev</groupId>
 	<artifactId>cics-java-liberty-restapp</artifactId>
 	<name>cics-java-liberty-restapp</name>
 	<version>0.1.0</version>
+
+	<!-- Package as an executable war (default is jar) -->
 	<packaging>war</packaging>
-	<description>description</description>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.4.0</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- CICS bundle build, specify <jvmserver> value to match CICS JVMSERVER name -->
+				<groupId>com.ibm.cics</groupId>
+				<artifactId>cics-bundle-maven-plugin</artifactId>
+				<version>1.0.5</version>
+				<executions>
+				  <execution>
+					<goals>
+					  <goal>bundle-war</goal>
+					</goals>								
+					<configuration>
+					  <jvmserver>DFHWLP</jvmserver>
+					</configuration>
+				  </execution>
+				</executions>
+			  </plugin>
+
+		</plugins>
+	</build>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -36,9 +71,7 @@
 			<artifactId>com.ibm.cics.server</artifactId>
 		</dependency>
 
-        
-		<!-- Compile against, but don't include JAXRS in the final build -->
-		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+		<!-- Compile against, but don't include JAXRS in the final build -->	
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
