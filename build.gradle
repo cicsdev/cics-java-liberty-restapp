@@ -4,6 +4,7 @@ id 'java'
 id 'eclipse'
 id 'idea'
 id 'war'
+id 'com.ibm.cics.bundle' version '1.0.5'
 }
 
 group = 'com.ibm.cicsdev.restap'
@@ -40,5 +41,15 @@ dependencies
     // Compile against, but don't include JAXRS in the final build 
     // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api   
     compileOnly ("javax.ws.rs:javax.ws.rs-api:2.0")
-    
+
+    // Add the files from the war task as CICS bundle parts
+    cicsBundlePart files(war)
+}
+
+
+// CICS bundle build, CICS bundle build, specify defaultJVMServer value to match CICS JVMSERVER name
+cicsBundle {
+    build {
+        defaultJVMServer = "DFHWLP"
+    }
 }
