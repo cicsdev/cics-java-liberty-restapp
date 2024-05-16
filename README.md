@@ -43,7 +43,7 @@ a CICS bundle project.
 
 
 ### To add the resources to Eclipse:
-1. Using an Eclipse development environment create an dynamic web project called `com.ibm.cicsdev.restapp` and add the Java samples to the `src` folder
+1. Using an Eclipse development environment create a dynamic web project called `com.ibm.cicsdev.restapp` and add the Java samples to the `src` folder
 1. Add the CICS Liberty JVM server libraries to the build path of your project. 
 1. Ensure the web project is targeted to compile at a level that is compatible with the Java level being used on CICS. This can be achieved by editing the Java Project Facet in the project properties.
 1. Create a CICS bundle project called `com.ibm.cicsdev.restapp.cicsbundle` and add a dynamic web project include for the project created in step 1.

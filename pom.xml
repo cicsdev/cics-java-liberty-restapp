@@ -27,7 +27,7 @@
 			</plugin>
 
 			<plugin>
-				<!-- CICS bundle build, specify <jvmserver> name to match CICS JVMSERVER name -->
+				<!-- CICS bundle build, specify <jvmserver> value to match CICS JVMSERVER name -->
 				<groupId>com.ibm.cics</groupId>
 				<artifactId>cics-bundle-maven-plugin</artifactId>
 				<version>1.0.5</version>
