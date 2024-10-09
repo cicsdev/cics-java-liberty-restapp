@@ -4,7 +4,7 @@ id 'java'
 id 'eclipse'
 id 'idea'
 id 'war'
-id 'com.ibm.cics.bundle' version '1.0.5'
+id 'com.ibm.cics.bundle' version '1.0.6'
 }
 
 group = 'com.ibm.cicsdev.restap'
@@ -13,8 +13,9 @@ sourceCompatibility = '1.8'
 
 apply plugin: 'war'
 
+
 war {    
-    // set archive name for consistency 
+    //set archive name for consistency 
     archiveName='cics-java-liberty-restapp.war'
 }
 
