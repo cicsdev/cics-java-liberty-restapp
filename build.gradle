@@ -16,7 +16,10 @@ apply plugin: 'war'
 
 war {    
     //set archive name for consistency 
-    archiveName='cics-java-liberty-restapp.war'
+    // Gradle 8.10 syntax
+    archiveName.set 'cics-java-liberty-restapp.war'
+    // Gradle ?? syntax
+    // archiveName='cics-java-liberty-restapp.war'
 }
 
 // If in Eclipse, add Javadoc to the local project classpath
