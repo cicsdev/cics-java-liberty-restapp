@@ -10,6 +10,7 @@
 	<artifactId>cics-java-liberty-restapp</artifactId>
 	<name>cics-java-liberty-restapp</name>
 	<version>0.1.0</version>
+	
 
 	<!-- Package as an executable war (default is jar) -->
 	<packaging>war</packaging>
@@ -17,12 +18,14 @@
 	<build>
 		<plugins>
 
+			<!-- WAR plugin build, set archive name for consistency -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.4.0</version>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<failOnMissingWebXml>false</failOnMissingWebXml>					
+					<warName>cics-java-liberty-restapp</warName>
 				</configuration>
 			</plugin>
 

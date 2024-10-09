@@ -67,7 +67,7 @@ If using the CICS bundle ZIP, the JVM server the CICS bundle is targeted at shou
 
 Run the following in a local command prompt:
 
-`mvn clean package`
+`mvn clean install`
 
 This creates a WAR file and a CICS bundle zIP file inside the `target` directory.
 

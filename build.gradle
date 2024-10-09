@@ -8,11 +8,15 @@ id 'com.ibm.cics.bundle' version '1.0.5'
 }
 
 group = 'com.ibm.cicsdev.restap'
-archivesBaseName='cics-java-liberty-restapp'
 version = '0.1.0'
 sourceCompatibility = '1.8'
 
 apply plugin: 'war'
+
+war {    
+    // set archive name for consistency 
+    archiveName='cics-java-liberty-restapp.war'
+}
 
 // If in Eclipse, add Javadoc to the local project classpath
 eclipse 
