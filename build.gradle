@@ -58,6 +58,6 @@ dependencies
 // CICS bundle build, CICS bundle build, specify defaultJVMServer value to match CICS JVMSERVER name
 cicsBundle {
     build {
-        defaultJVMServer = "DFHWLP"
+        defaultJVMServer = jvmserver
     }
 }
