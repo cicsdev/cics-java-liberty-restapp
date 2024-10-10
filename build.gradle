@@ -16,7 +16,7 @@ apply plugin: 'war'
 
 war {    
     //set archive name for consistency 
-    archiveName='cics-java-liberty-restapp.war'
+    archiveFileName='cics-java-liberty-restapp.war'
 }
 
 // If in Eclipse, add Javadoc to the local project classpath
