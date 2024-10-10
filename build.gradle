@@ -51,7 +51,7 @@ dependencies
     cicsBundlePart files(war)
 
     //JAXB requires if using Java 11 or later
-    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    //implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
 }
 
 
