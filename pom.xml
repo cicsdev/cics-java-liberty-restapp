@@ -10,15 +10,14 @@
 	<artifactId>cics-java-liberty-restapp</artifactId>
 	<name>cics-java-liberty-restapp</name>
 	<version>0.1.0</version>
-	
+	<description>Sample JAX-RS RESTful web application for Liberty that links to a CICS® COBOL program </description>	
 
 	<!-- Package as an executable war (default is jar) -->
 	<packaging>war</packaging>
 
 	<build>
 		<plugins>
-
-			<!-- WAR plugin build, set archive name for consistency -->
+			<!-- WAR plugin build, set war archive name for consistency -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -40,7 +39,7 @@
 					  <goal>bundle-war</goal>
 					</goals>								
 					<configuration>
-					  <jvmserver>DFHWLP</jvmserver>
+					  <jvmserver>${jvmserver}</jvmserver>
 					</configuration>
 				  </execution>
 				</executions>
@@ -50,8 +49,12 @@
 	</build>
 
 	<properties>
-		<java.version>1.8</java.version>
-	</properties>
+		<java.version>1.8</java.version>	
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<jvmserver>DFHWLP</jvmserver>
+	  </properties>
 
 	<!-- CICS TS V5.5 BOM (as of May 2020) -->
 	<dependencyManagement>
@@ -81,6 +84,18 @@
 			<version>2.0</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!--JAXB required if using Java 11 or later 
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+			<scope>provided</scope> 	    
+		</dependency>
+		-->
+	
 	</dependencies>
+
+
 
 </project>
