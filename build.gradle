@@ -7,7 +7,8 @@ id 'war'
 id 'com.ibm.cics.bundle' version '1.0.6'
 }
 
-group = 'com.ibm.cicsdev.restap'
+group = 'com.ibm.cicsdev.restapp'
+archivesBaseName='cics-java-liberty-restapp'
 version = '0.1.0'
 sourceCompatibility = '1.8'
 
@@ -50,8 +51,8 @@ dependencies
     // Add the files from the war task as CICS bundle parts
     cicsBundlePart files(war)
 
-    //JAXB required if using Java 11 or later
-    //implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    //JAXB required if compiling with Java 11 or later
+    compileOnly ("javax.xml.bind:jaxb-api:2.3.1")
 }
 
 
