@@ -70,7 +70,7 @@ If using the CICS bundle ZIP, the CICS JVM server name should be modified in the
 
 Run the following in a local command prompt which will create a WAR file for deployment.
 
-`mvn clean package`
+`mvn clean verify`
 
 This creates a WAR file in the `target` directory. 
 
