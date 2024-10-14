@@ -4,15 +4,21 @@ id 'java'
 id 'eclipse'
 id 'idea'
 id 'war'
-id 'com.ibm.cics.bundle' version '1.0.5'
+id 'com.ibm.cics.bundle' version '1.0.6'
 }
 
-group = 'com.ibm.cicsdev.restap'
+group = 'com.ibm.cicsdev.restapp'
 archivesBaseName='cics-java-liberty-restapp'
 version = '0.1.0'
 sourceCompatibility = '1.8'
 
 apply plugin: 'war'
+
+
+war {    
+    //set archive name for consistency 
+    archiveFileName='cics-java-liberty-restapp.war'
+}
 
 // If in Eclipse, add Javadoc to the local project classpath
 eclipse 
@@ -44,12 +50,15 @@ dependencies
 
     // Add the files from the war task as CICS bundle parts
     cicsBundlePart files(war)
+
+    //JAXB required if compiling with Java 11 or later
+    //compileOnly ("javax.xml.bind:jaxb-api:2.3.1")
 }
 
 
 // CICS bundle build, CICS bundle build, specify defaultJVMServer value to match CICS JVMSERVER name
 cicsBundle {
     build {
-        defaultJVMServer = "DFHWLP"
+        defaultJVMServer = jvmserver
     }
 }
