@@ -12,14 +12,6 @@ archivesBaseName='cics-java-liberty-restapp'
 version = '0.1.0'
 sourceCompatibility = '1.8'
 
-apply plugin: 'war'
-
-
-war {    
-    //set archive name for consistency 
-    archiveFileName='cics-java-liberty-restapp.war'
-}
-
 // If in Eclipse, add Javadoc to the local project classpath
 eclipse 
 {
@@ -59,6 +51,6 @@ dependencies
 // CICS bundle build, CICS bundle build, specify defaultJVMServer value to match CICS JVMSERVER name
 cicsBundle {
     build {
-        defaultJVMServer = jvmserver
+         defaultJVMServer = project.findProperty("jvmserver") ?: "DFHWLP"
     }
 }
