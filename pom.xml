@@ -17,13 +17,12 @@
 
 	<build>
 		<plugins>
-			<!-- WAR plugin build, set war archive name for consistency -->
+			<!-- WAR plugin build-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.4.0</version>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>					
 					<warName>cics-java-liberty-restapp</warName>
 				</configuration>
 			</plugin>
