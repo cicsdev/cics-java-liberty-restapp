@@ -84,13 +84,13 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!--JAXB required if compiling with Java 11 or later 	
+		<!--JAXB required if compiling with Java 11 or later -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.1</version>
 			<scope>provided</scope> 	    
-		</dependency> -->
+		</dependency> 
 	
 	
 	</dependencies>
