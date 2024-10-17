@@ -44,7 +44,7 @@ dependencies
     cicsBundlePart files(war)
 
     //JAXB required if compiling with Java 11 or later
-    //compileOnly ("javax.xml.bind:jaxb-api:2.3.1")
+    compileOnly ("javax.xml.bind:jaxb-api:2.3.1")
 }
 
 
