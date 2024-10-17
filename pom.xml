@@ -17,14 +17,13 @@
 
 	<build>
 		<plugins>
-			<!-- WAR plugin build, set war archive name for consistency -->
+			<!-- WAR plugin build-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.4.0</version>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>					
-					<warName>cics-java-liberty-restapp</warName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>										
 				</configuration>
 			</plugin>
 
@@ -85,13 +84,13 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!--JAXB required if compiling with Java 11 or later 	
+		<!--JAXB required if compiling with Java 11 or later -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.1</version>
 			<scope>provided</scope> 	    
-		</dependency> -->
+		</dependency> 
 	
 	
 	</dependencies>
