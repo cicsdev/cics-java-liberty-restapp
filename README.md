@@ -96,7 +96,7 @@ If building a CICS bundle ZIP the CICS bundle plugin bundle-war goal is driven u
 1. Download and compile the supplied COBOL program `EDUCHAN` and deploy into CICS.
 
 
-**Note:** sample DFHCSDUP EXTRACT output for the required CICS resource definitions is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
+**Note:** A sample DFHCSDUP input file for the required CICS BUNDLE resource definition is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
 
 
 ### Running the Example
