@@ -28,8 +28,8 @@ jobs:
         run: mvn --batch-mode --update-snapshots --file pom.xml -Djava.version=${{ matrix.jdk }} package
       - run: |
              mkdir staging 
-             cp cics-java-liberty-restapp/target/*.war staging
-             cp cics-java-liberty-restapp/target/*.zip staging
+             cp target/*.war staging
+             cp target/*.zip staging
       - uses: actions/upload-artifact@v4
         with:
           name: cics-java-liberty-restapp (Maven, Java ${{ matrix.jdk }})
