@@ -1,6 +1,8 @@
 cics-java-liberty-restapp
 ===========================
 
+[![Build](https://github.com/cicsdev/cics-java-liberty-restapp/actions/workflows/main.yml/badge.svg)](https://github.com/cicsdev/cics-java-liberty-restapp/actions/workflows/main.yml)
+
 Sample RESTful web application for deployment to a Liberty JVM server in CICS. The application is supplied with two resources:
 
 1. `InfoResource` - This queries the JVM server environment using system properties and uses JAXB beans to return a JSON response detailing the CICS environment.
