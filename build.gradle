@@ -51,6 +51,6 @@ dependencies
 // CICS bundle build, CICS bundle build, specify defaultJVMServer value to match CICS JVMSERVER name
 cicsBundle {
     build {
-         defaultJVMServer = project.findProperty("jvmserver") ?: "DFHWLP"
+         defaultJVMServer = project.findProperty("cics.jvmserver") ?: "DFHWLP"
     }
 }
