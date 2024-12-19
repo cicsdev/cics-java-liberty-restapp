@@ -38,7 +38,7 @@
 					  <goal>bundle-war</goal>
 					</goals>								
 					<configuration>
-					  <jvmserver>${jvmserver}</jvmserver>
+					  <jvmserver>${cics.jvmserver}</jvmserver>
 					</configuration>
 				  </execution>
 				</executions>
@@ -52,7 +52,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<jvmserver>DFHWLP</jvmserver>
+		<cics.jvmserver>DFHWLP</cics.jvmserver>
 	  </properties>
 
 	<!-- CICS TS V5.5 BOM (as of May 2020) -->
