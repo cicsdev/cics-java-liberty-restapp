@@ -76,7 +76,7 @@ Run the following in a local command prompt which will create a WAR file for dep
 
 This creates a WAR file in the `target` directory. 
 
-If building a CICS bundle ZIP the CICS bundle plugin bundle-war goal is driven using the maven verify phase. The CICS JVM server name should be modified in the <cics.jvmserver> property in the [`pom.xml`](pom.xml) to match the required CICS JVMSERVER resource name, or alternatively can be set on the command line as follows. 
+If building a CICS bundle ZIP the CICS bundle plugin bundle-war goal is driven using the maven verify phase. The CICS JVM server name should be modified in the `<cics.jvmserver>` property in the [`pom.xml`](pom.xml) to match the required CICS JVMSERVER resource name, or alternatively can be set on the command line as follows. 
 
 `mvn clean verify -Dcics.jvmserver=MYJVM`
 
