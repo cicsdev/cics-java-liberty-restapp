@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build-maven:
+    name: Build Maven
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        jdk: [8, 11, 17, 21]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{ matrix.jdk }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.jdk }}
+          distribution: "semeru"
+          cache: maven
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots --file pom.xml -Djava.version=${{ matrix.jdk }} package
+        
+  build-gradle:
+    name: Build Gradle
+    
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        jdk: [8, 11, 17, 21]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK ${{ matrix.jdk }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ matrix.jdk }}
+        distribution: 'semeru'
+    - uses: gradle/actions/setup-gradle@v3
+      with: 
+        gradle-version: 8.5
+    - name: Build with Gradle
+      run: gradle build -Pjava_version=${{ matrix.jdk }}
