@@ -9,8 +9,8 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  build-maven:
-    name: Build Maven
+  build-mvnw:
+    name: Build Maven Wrapper
 
     runs-on: ubuntu-latest
     strategy:
@@ -25,11 +25,12 @@ jobs:
           distribution: "semeru"
           cache: maven
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots --file pom.xml -Djava.version=${{ matrix.jdk }} package
-        
-  build-gradle:
-    name: Build Gradle
-    
+        run: ./mvnw --batch-mode --update-snapshots --file pom.xml -Djava.version=${{ matrix.jdk }} verify 
+
+
+  build-gradlew:
+    name: Build Gradle Wrapper
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -43,6 +44,6 @@ jobs:
         distribution: 'semeru'
     - uses: gradle/actions/setup-gradle@v3
       with: 
-        gradle-version: 8.5
+        gradle-version: 8.6
     - name: Build with Gradle
-      run: gradle build -Pjava_version=${{ matrix.jdk }}
+      run: ./gradlew clean build -Pjava_version=${{ matrix.jdk }}      
