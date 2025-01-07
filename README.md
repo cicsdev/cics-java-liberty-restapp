@@ -50,38 +50,37 @@ a CICS bundle project.
 1. Ensure the web project is targeted to compile at a level that is compatible with the Java level being used on CICS. This can be achieved by editing the Java Project Facet in the project properties.
 1. Create a CICS bundle project called `com.ibm.cicsdev.restapp.cicsbundle` and add a dynamic web project include for the project created in step 1.
 
-### Building the Example
+## Building the Sample
 
-The sample can be built using the supplied Gradle or Maven build files to produce a WAR file and optionally a CICS Bundle archive.
+The sample can be built using Gradle or Maven to produce a WAR file and optionally a CICS Bundle archive.
 
-#### Gradle (command line)
+### Building with Gradle
 
-Run the following in a local command prompt:
+A WAR file is created inside the `build/libs` directory and a CICS bundle ZIP file inside the `build/distributions` directory.
 
-`gradle clean build`
+If using the CICS bundle ZIP, the CICS JVM server name should be modified in the  `cics.jvmserver` property in the gradle build [file](build.gradle) to match the required CICS JVMSERVER resource name, or alternatively can be set on the command line.
 
-This creates a WAR file inside the `build/libs` directory and a CICS bundle ZIP file inside the `build/distributions` directory.
-
-If using the CICS bundle ZIP, the CICS JVM server name should be modified in the  `cics.jvmserver` property in the gradle build [file](build.gradle) to match the required CICS JVMSERVER resource name, or alternatively can be set on the command line as follows.
-
-
-`gradle clean build -Pcics.jvmserver=MYJVM`
-
-
-#### Maven (command line)
-
-Run the following in a local command prompt which will create a WAR file for deployment.
-
-`mvn clean verify`
-
-This creates a WAR file in the `target` directory. 
-
-If building a CICS bundle ZIP the CICS bundle plugin bundle-war goal is driven using the maven verify phase. The CICS JVM server name should be modified in the `<cics.jvmserver>` property in the [`pom.xml`](pom.xml) to match the required CICS JVMSERVER resource name, or alternatively can be set on the command line as follows. 
-
-`mvn clean verify -Dcics.jvmserver=MYJVM`
+| Tool | Command |
+| ----------- | ----------- |
+| Gradle Wrapper (Linux/Mac) | ```./gradlew clean build``` |
+| Gradle Wrapper (Windows) | ```gradle.bat clean build``` |
+| Gradle (command-line) | ```gradle clean build``` |
+| Gradle (command-line & setting jvmserver) | ```gradle clean build -Pcics.jvmserver=MYJVM``` |
 
 
+### Building with Apache Maven
+A WAR file and a CICS bundle ZIP file are created inside the `target/` directory.
 
+If building a CICS bundle ZIP the CICS bundle plugin bundle-war goal is driven using the maven verify phase. The CICS JVM server name should be modified in the `<cics.jvmserver>` property in the [`pom.xml`](pom.xml) to match the required CICS JVMSERVER resource name, or alternatively can be set on the command line.
+
+ Tool | Command |
+| ----------- | ----------- |
+| Maven Wrapper (Linux/Mac) | ```./mvnw clean verify``` |
+| Maven Wrapper (Windows) | ```mvnw.cmd clean verify``` |
+| Maven (command-line) | ```mvn clean verify``` |
+| Maven (command-line & setting jvmserver) | ```mvn clean verify -Dcics.jvmserver=MYJVM``` |
+
+## Deployment
 ### To start a JVM server in CICS:
 1. Enable Java support in the CICS region by adding the `SDFJAUTH` library to the `STEPLIB` concatenation and setting `USSHOME` and the `JVMPROFILEDIR` SIT parameters.
     * This step is **not** required if using CICS 5.5 or later
@@ -101,9 +100,9 @@ If building a CICS bundle ZIP the CICS bundle plugin bundle-war goal is driven u
 **Note:** A sample DFHCSDUP input file for the required CICS BUNDLE resource definition is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
 
 
-### Running the Example
+## Running the Sample
 
-#### Using a web browser you can issue the following HTTP GET requests
+### Using a web browser you can issue the following HTTP GET requests
 
 * http://host:port/com.ibm.cicsdev.restapp/rest/cicsinfo
 
