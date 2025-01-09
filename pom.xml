@@ -23,7 +23,10 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.4.0</version>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>										
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>										
 				</configuration>
 			</plugin>
 
