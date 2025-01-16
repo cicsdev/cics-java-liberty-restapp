@@ -6,7 +6,9 @@ cics-java-liberty-restapp
 Sample RESTful web application for deployment to a Liberty JVM server in CICS. The application is supplied with two resources:
 
 1. `InfoResource` - This queries the JVM server environment using system properties and uses JAXB beans to return a JSON response detailing the CICS environment.
-1. `ReverseResource` - This is similar to `InfoResource`, but uses the JCICS API to link to the COBOL program `EDUCHAN` using channels and containers. An input string is passed to `EDUCHAN`, which is then reversed and returned, along with the time from CICS. 
+1. `ReverseResource` - This is similar to `InfoResource`, but uses the JCICS API to link to the COBOL program `EDUCHAN` using channels and containers. An input string is passed to `EDUCHAN`, which is then reversed and returned, along with the time from CICS.
+
+Further extensions to this application are available in the repository [cics-java-liberty-restappext](https://github.com/cicsdev/cics-java-liberty-restappext) which provides several code examples for accessing CICS resources from Java using the JCICS API.
 
 The following Java source components are supplied in the [`src/main/java`](src/main/java) directory in this repository.
 
@@ -23,7 +25,7 @@ The following Java source components are supplied in the [`src/main/java`](src/m
 
 
 ## Supporting files
-* [`DFHCSD.txt`](etc/DFHCSD.txt) - Output from a DFHCSDUP EXTRACT for the CICS BUNDLE resource definition.
+* [`DFHCSD.txt`](etc/DFHCSD.txt) - DFHCSDUP sample input stream for the CICS BUNDLE resource definition.
 * [`EDUCHAN.cbl`](src/cobol/EDUCHAN.cbl) - A sample CICS COBOL that returns the date and time and reversed input using channels and containers
 * [`build.gradle`](build.gradle) - A sample Gradle build file to enable an automated build of the deployable WAR
 * [`pom.xml`](pom.xml) - A sample Maven build file to enable an automated build of the deployable WAR
@@ -31,7 +33,7 @@ The following Java source components are supplied in the [`src/main/java`](src/m
 
 ## Pre-reqs
 
-* CICS TS V5.1 or later, due to the usage of the `getString()` methods.
+* CICS TS V5.5 or later.
 * Java SE 1.8 or later on the workstation
 * Eclipse with the IBM CICS SDK for Java EE, Jakarta EE and Liberty, or any IDE that supports usage of the Maven Central artifact [com.ibm.cics:com.ibm.cics.server.](https://search.maven.org/artifact/com.ibm.cics/com.ibm.cics.server) 
 
