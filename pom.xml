@@ -9,46 +9,13 @@
 	<groupId>com.ibm.cicsdev</groupId>
 	<artifactId>cics-java-liberty-restapp</artifactId>
 	<name>cics-java-liberty-restapp</name>
-	<version>0.1.0</version>
+	<version>1.0.0</version>
 	<description>Sample JAX-RS RESTful web application for Liberty that links to a CICS® COBOL program </description>	
 
 	<!-- Package as an executable war (default is jar) -->
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
-	<build>
-		<plugins>
-			<!-- WAR plugin build-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.4.0</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>										
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<!-- CICS bundle build, specify <jvmserver> value to match CICS JVMSERVER name -->
-				<groupId>com.ibm.cics</groupId>
-				<artifactId>cics-bundle-maven-plugin</artifactId>
-				<version>1.0.6</version>
-				<executions>
-				  <execution>
-					<goals>
-					  <goal>bundle-war</goal>
-					</goals>								
-					<configuration>
-					  <jvmserver>${cics.jvmserver}</jvmserver>
-					</configuration>
-				  </execution>
-				</executions>
-			  </plugin>
-
-		</plugins>
-	</build>
+	
 
 	<properties>
 		<java.version>1.8</java.version>	
@@ -64,39 +31,19 @@
 			<dependency>
 				<groupId>com.ibm.cics</groupId>
 				<artifactId>com.ibm.cics.ts.bom</artifactId>
-				<version>5.5-20200519131930-PH25409</version>
+				<version>5.5-20250812140737-PH63855</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
-		<!-- Compile against, but don't include JCICS in the final build (version 
-			and scope are from BOM) -->
-		<dependency>
-			<groupId>com.ibm.cics</groupId>
-			<artifactId>com.ibm.cics.server</artifactId>
-		</dependency>
 
-		<!-- Compile against, but don't include JAXRS in the final build -->	
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.0</version>
-			<scope>provided</scope>
-		</dependency>
 
-		<!--JAXB required if compiling with Java 11 or later -->
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.3.1</version>
-			<scope>provided</scope> 	    
-		</dependency> 
-	
-	
-	</dependencies>
+	<modules>
+        <module>cics-java-liberty-restapp-app</module>
+        <module>cics-java-liberty-restapp-bundle</module>
+    </modules>
 
 
 

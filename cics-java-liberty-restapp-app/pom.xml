@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ibm.cicsdev</groupId>
+        <artifactId>cics-java-liberty-restapp</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>cics-java-liberty-restapp-app</artifactId>
+    <packaging>war</packaging>
+
+    <name>CICS Enterprise Java Program - Application</name>
+
+    <dependencies>
+        <!-- Compile against, but don't include JCICS in the final build (version 
+            and scope are from BOM) -->
+        <dependency>
+            <groupId>com.ibm.cics</groupId>
+            <artifactId>com.ibm.cics.server</artifactId>
+        </dependency>
+
+        <!-- Compile against, but don't include JAXRS in the final build -->	
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--JAXB required if compiling with Java 11 or later -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope> 	    
+        </dependency> 
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- WAR plugin build-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>										
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!-- CICS bundle build, specify <jvmserver> value to match CICS JVMSERVER name -->
+                <groupId>com.ibm.cics</groupId>
+                <artifactId>cics-bundle-maven-plugin</artifactId>
+                <version>1.0.6</version>
+                <executions>
+                    <execution>
+                    <goals>
+                        <goal>bundle-war</goal>
+                    </goals>								
+                    <configuration>
+                        <jvmserver>${cics.jvmserver}</jvmserver>
+                    </configuration>
+                    </execution>
+                </executions>
+                </plugin>
+
+        </plugins>
+    </build>
+</project>
