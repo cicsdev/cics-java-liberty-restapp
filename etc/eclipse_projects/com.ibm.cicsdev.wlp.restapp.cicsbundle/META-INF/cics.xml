@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><manifest xmlns="http://www.ibm.com/xmlns/prod/cics/bundle" bundleMajorVer="1" bundleMicroVer="0" bundleMinorVer="0" bundleRelease="0" bundleVersion="1" id="cics-java-liberty-restapp-bundle">
+  <meta_directives>
+    <timestamp>2025-09-02T15:13:21.573Z</timestamp>
+  </meta_directives>
+  <define name="cics-java-liberty-restapp-app-1.0.0" path="cics-java-liberty-restapp-app-1.0.0.warbundle" type="http://www.ibm.com/xmlns/prod/cics/bundle/WARBUNDLE"/>
+</manifest>
