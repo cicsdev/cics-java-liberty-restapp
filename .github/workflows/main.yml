@@ -9,6 +9,19 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
+  check-copyright:
+    runs-on: ubuntu-latest
+    name: Check Copyright
+    steps:
+      - uses: actions/checkout@v4
+      - id: copyright-action
+        uses: cicsdev/.github/.github/actions/samples-copyright-checker@139edd8dc23af7f4f7dd9afe4d56a1053fe426a7
+        with:
+          directory: './cics-java-liberty-restapp-app/'
+          file-extensions: '*.java'
+          base-copyright: 'Copyright IBM Corp. 2025'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   build-mvnw:
     name: Build Maven Wrapper
 
@@ -25,8 +38,8 @@ jobs:
           distribution: "semeru"
           cache: maven
       - name: Build with Maven
-        run: ./mvnw --batch-mode --update-snapshots --file pom.xml -Djava.version=${{ matrix.jdk }} verify 
-
+        run: ./mvnw --batch-mode --update-snapshots --file pom.xml -Djava.version=${{ matrix.jdk }} verify          
+      
 
   build-gradlew:
     name: Build Gradle Wrapper
@@ -42,8 +55,8 @@ jobs:
       with:
         java-version: ${{ matrix.jdk }}
         distribution: 'semeru'
-    - uses: gradle/actions/setup-gradle@v3
+    - uses: gradle/actions/setup-gradle@v4
       with: 
         gradle-version: 8.6
     - name: Build with Gradle
-      run: ./gradlew clean build -Pjava_version=${{ matrix.jdk }}      
+      run: ./gradlew clean build -Pjava_version=${{ matrix.jdk }}    
