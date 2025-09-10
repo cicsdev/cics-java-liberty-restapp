@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - id: copyright-action
-        uses: cicsdev/.github/.github/actions/samples-copyright-checker@aj-changes
+        uses: cicsdev/.github/.github/actions/samples-copyright-checker@4134522d8109169bb8c460db841f94167ec2802f
         with:
           directory: './cics-java-liberty-restapp-app/'
           file-extensions: '*.java'
