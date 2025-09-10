@@ -1,0 +1,3 @@
+rootProject.name = 'cics-java-liberty-restapp'
+include(':cics-java-liberty-restapp-app')
+include(':cics-java-liberty-restapp-bundle')
