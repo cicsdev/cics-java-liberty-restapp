@@ -27,8 +27,7 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 
 - [cics-java-liberty-restapp](./cics-java-liberty-restapp) - Top-level project.
 - [cics-java-liberty-restapp-app](./cics-java-liberty-restapp-app) - Application source code.
-- [cics-java-liberty-restapp-bundle](./cics-java-liberty-restapp-bundle) - CICS bundle plug-in based project. Use with Gradle and Maven builds.
-- [etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle](./etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with CICS Explorer 'Export to zFS' deployment capability.
+- [cics-java-liberty-restapp-bundle](./cics-java-liberty-restapp-bundle) - CICS bundle project. Use with Gradle and Maven builds or as a Eclipse CICS Bundle project.
 
 
 ## Prerequisites
