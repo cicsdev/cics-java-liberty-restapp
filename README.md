@@ -69,14 +69,7 @@ If you are building and deploying with Gradle or Maven then you don't necessaril
 
 
 
-
-### Option 1: Building with Eclipse
-
-Import the projects into Eclipse using File &rarr; Import &rarr; General &rarr; Existing projects into workspace. Selecting the download zip as the archive.
-To resolve build issuesin Eclipse you should configure the Project's build-path to add your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Select 'Java Build Path', on the Libraries tab, select 'Classpath', click 'Add Library', select 'CICS with Enterprise Java and Liberty' Library, and choose the appropriate CICS and Enterprise Java versions.
-If the project build correctly the Eclipse Problems view should no longer have any errors displayed.
-
-### Option 2a: Building with Gradle
+### Option 1a: Building with Gradle
 
 The sample comes pre-configured with a Gradle wrapper and Gradle build files to facilitate automated builds. The `gradlew` command is used to invoke the wrapper and should be invoked from the top-level 'cics-java-liberty-restapp' directory which will then invoke the individual build.gradle files for each sub-project. 
 
@@ -98,7 +91,7 @@ gradlew clean build -Pcics.jvmserver=MYJVM
 
 If successful, a WAR file is created inside the `cics-java-liberty-restapp-app/build/libs` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/build/distribution` directory. 
 
-### Option 2b: Building with Apache Maven
+### Option 1b: Building with Apache Maven
 
 The sample comes pre-configured with a Maven wrapper and Maven build files to facilitate automated builds. The `mvnw` command is used to invoke the wrapper and should be invoked from the top-level 'cics-java-liberty-restapp' directory which will then invoke the individual Maven `pom.xml` files for each sub-project. 
 
@@ -120,6 +113,15 @@ mvnw clean verify -Dcics.jvmserver=MYJVM
 ```
 
 A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
+
+### Option 2: Building with Eclipse
+
+Install the latest version of the IBM CICS Explorer [see](https://www.ibm.com/support/pages/cics-explorer-downloads)
+
+Import the projects into Eclipse using **File &rarr; Import &rarr; General &rarr; Existing projects into workspace &rarr; Select archive file** and select the downloaded zip as the archive. 
+
+To resolve build issues in Eclipse you should configure the Project's build-path to add your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Select 'Java Build Path', on the Libraries tab, select 'Classpath', click 'Add Library', select 'CICS with Enterprise Java and Liberty' Library, and choose the appropriate CICS and Enterprise Java versions.
+If the project build correctly the Eclipse Problems view should no longer have any errors displayed.
 
 
 ## Deploying
