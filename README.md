@@ -133,7 +133,7 @@ If the project built correctly the Eclipse Problems view should no longer have a
 
 ### Deploying the CICS Bundle with CICS Explorer
 1. First check the name of the JVMSERVER in the .warbundle file of the CICS bundle project (com.ibm.cicsdev.wlp.restapp.cicsbundle), and ensure this matches the name of your JVMSERVER resource defined in CICS. The default used is DFHWLP.
-2. Export the CICS bundle project to zFS by selecting **Export Bundle project to z/OS Unix File System** from the context menu in Eclipse. The samples uses the directory `/u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
+2. Export the CICS bundle project to zFS by selecting **Export Bundle project to z/OS Unix File System** from the context menu in Eclipse. The samples uses the directory `/u/cics1/com.ibm.cicsdev.restapp.bundle_1.0.0`.
 
 
 ### Deploying the CICS Bundle from Gradle or Maven
