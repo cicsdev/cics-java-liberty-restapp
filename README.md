@@ -118,10 +118,10 @@ A WAR file is created inside the `cics-java-liberty-restapp-app/target` director
 
 Install the latest version of the IBM CICS Explorer [see](https://www.ibm.com/support/pages/cics-explorer-downloads)
 
-Import the projects into Eclipse using **File &rarr; Import &rarr; General &rarr; Existing projects into workspace &rarr; Select archive file** and select the downloaded zip as the archive. Ensure you select **Search for nested projects**.
+Import the projects into Eclipse using **File &rarr; Import &rarr; General &rarr; Existing projects into workspace &rarr; Select archive file** and select the downloaded zip as the archive. Ensure you select **Search for nested projects** and include the CICS Bundle project `com.ibm.cicsdev.wlp.restapp.cicsbundle`.
 
 To resolve build issues in Eclipse you should configure the application project's build-path to add your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). On the `cics-java-liberty-restapp-app` project select Select **Build Path  &rarr; Configure Build Path  &rarr; Java Build Path** then on the **Libraries** tab, click **Add Library CICS with Enterprise Java and Liberty** and choose the appropriate CICS and Enterprise Java versions.
-If the project build correctly the Eclipse Problems view should no longer have any errors displayed.
+If the project built correctly the Eclipse Problems view should no longer have any errors displayed.
 
 
 ## Deploying
@@ -133,20 +133,20 @@ If the project build correctly the Eclipse Problems view should no longer have a
 
 
 ### Deploying the CICS Bundle with CICS Explorer
-1. First check the name of the JVMSERVER in the .warbundle file of the CICS bundle project, and ensure this matches the name of your JVMSERVER resource defined in CICS. The default used is DFHWLP.
-2. Export the bundle project to zFS by selecting 'Export Bundle project to z/OS Unix File System' from the CICS Bundle project context menu in Eclipse. The samples uses the directory `/u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
-3. In CICS, create a bundle definition, setting the bundle directory attribute to the zFS location you just exported to in step 2. and install it. 
+1. First check the name of the JVMSERVER in the .warbundle file of the CICS bundle project (com.ibm.cicsdev.wlp.restapp.cicsbundle), and ensure this matches the name of your JVMSERVER resource defined in CICS. The default used is DFHWLP.
+2. Export the CICS bundle project to zFS by selecting **Export Bundle project to z/OS Unix File System** from the context menu in Eclipse. The samples uses the directory `/u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
+
 
 ### Deploying the CICS Bundle from Gradle or Maven
 1. Manually upload the ZIP file from the _cics-java-liberty-restapp-bundle/target_ or _cics-java-liberty-restapp-bundle/build/distributions_ directory to zFS.
 2. Unzip this ZIP file on zFS (e.g. `${JAVA_HOME}/bin/jar -xvf /path/to/bundle.zip`).
-3. Create a CICS BUNDLE resource definition, setting the bundle directory attribute to the zFS location you just extracted to, and install it into the CICS region. 
+3. Create a CICS BUNDLE resource definition,  and install it into the CICS region. 
 
 
 ### To install the sample into a CICS region:
 1. Check the JVM server is in the `Enabled` state.
-1. Download and compile the supplied COBOL program `EDUCHAN` and deploy into CICS
-1. Create a CICS BUNDLE definition, an example for usage with the DFHCSDUP utility is provided in [DFHCSD.txt](etc/DFHCSD.txt) file. 
+1. Download and compile the supplied COBOL program `EDUCHAN` and deploy into CICS.
+1. Create a CICS BUNDLE definition, an example for usage with the DFHCSDUP utility is provided in [DFHCSD.txt](etc/DFHCSD.txt) file. Ensure you set the bundle directory attribute to the zFS location you previously deployed the bundle proejct to.
 1. Install the CICS BUNDLE resource into CICS and ensure it becomes enabled.
 
 
