@@ -118,9 +118,9 @@ A WAR file is created inside the `cics-java-liberty-restapp-app/target` director
 
 Install the latest version of the IBM CICS Explorer [see](https://www.ibm.com/support/pages/cics-explorer-downloads)
 
-Import the projects into Eclipse using **File &rarr; Import &rarr; General &rarr; Existing projects into workspace &rarr; Select archive file** and select the downloaded zip as the archive. 
+Import the projects into Eclipse using **File &rarr; Import &rarr; General &rarr; Existing projects into workspace &rarr; Select archive file** and select the downloaded zip as the archive. Ensure you select **Search for nested projects**.
 
-To resolve build issues in Eclipse you should configure the Project's build-path to add your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Select 'Java Build Path', on the Libraries tab, select 'Classpath', click 'Add Library', select 'CICS with Enterprise Java and Liberty' Library, and choose the appropriate CICS and Enterprise Java versions.
+To resolve build issues in Eclipse you should configure the application project's build-path to add your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). On the `cics-java-liberty-restapp-app` project select Select **Build Path  &rarr; Configure Build Path  &rarr; Java Build Path** then on the **Libraries** tab, click **Add Library CICS with Enterprise Java and Liberty** and choose the appropriate CICS and Enterprise Java versions.
 If the project build correctly the Eclipse Problems view should no longer have any errors displayed.
 
 
