@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<manifest xmlns="http://www.ibm.com/xmlns/prod/cics/bundle" id="com.ibm.cics.server.examples.wlp.link.bundle" bundleVersion="1" bundleRelease="0" build="IntB-202108252027">
-    <meta_directives>
-        <timestamp>2026-03-31T16:41:05.797+01:00</timestamp>
-    </meta_directives>
-</manifest>
