@@ -47,8 +47,8 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 
 ## Downloading
 
-- Download the sample as a [ZIP](archive/refs/heads/main.zip) and unzip onto the workstation or clone the repository using a git client.
-
+ Clone the repository using your IDEs support, such as the Eclipse Git plugin
+- **or**, download the sample as a [ZIP](archive/refs/heads/main.zip) and unzip onto the workstation.
 
 ## Building 
 
