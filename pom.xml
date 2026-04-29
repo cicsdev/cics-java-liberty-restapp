@@ -42,7 +42,7 @@
 
 	<modules>
         <module>cics-java-liberty-restapp-app</module>
-        <module>cics-java-liberty-restapp-bundle</module>
+        <module>cics-java-liberty-restapp-cicsbundle</module>
     </modules>
 
 

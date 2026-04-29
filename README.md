@@ -27,7 +27,7 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 
 - [cics-java-liberty-restapp](./cics-java-liberty-restapp) - Top-level project.
 - [cics-java-liberty-restapp-app](./cics-java-liberty-restapp-app) - Application source code.
-- [cics-java-liberty-restapp-bundle](./cics-java-liberty-restapp-bundle) - CICS bundle project. Use with Gradle and Maven builds or as a Eclipse CICS Bundle project.
+- [cics-java-liberty-restapp-cicsbundle](./cics-java-liberty-restapp-cicsbundle) - CICS bundle project. Use with Gradle and Maven builds or as a Eclipse CICS Bundle project.
 
 
 ## Prerequisites
@@ -72,7 +72,7 @@ If you are building and deploying with Gradle or Maven then you don't necessaril
 
 The sample comes pre-configured with a Gradle wrapper and Gradle build files to facilitate automated builds. The `gradlew` command is used to invoke the wrapper and should be invoked from the top-level 'cics-java-liberty-restapp' directory which will then invoke the individual build.gradle files for each sub-project. 
 
-The JVM server the CICS bundle is targeted at is controlled through the `cics.jvmserver` property, defined in the [`cics-java-liberty-restapp-bundle/build.gradle`](cics-java-liberty-restapp-bundle/build.gradle) file, or alternatively can be set on the command line:
+The JVM server the CICS bundle is targeted at is controlled through the `cics.jvmserver` property, defined in the [`cics-java-liberty-restapp-cicsbundle/build.gradle`](cics-java-liberty-restapp-cicsbundle/build.gradle) file, or alternatively can be set on the command line:
 
 **Gradle Wrapper (Linux/Mac):**
 ```shell
@@ -85,17 +85,17 @@ gradlew.bat clean build
 
 **Gradle (command-line & setting jvmserver):**
 ```shell
-gradlew clean build -Pcics.jvmserver=MYJVM
+gradlew clean build "-Pcics.jvmserver=MYJVM"
 ```
 
-If successful, a WAR file is created inside the `cics-java-liberty-restapp-app/build/libs` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/build/distribution` directory. 
+If successful, a WAR file is created inside the `cics-java-liberty-restapp-app/build/libs` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-cicsbundle/build/distribution` directory. 
 
 ### Option 1b: Building with Apache Maven
 
 The sample comes pre-configured with a Maven wrapper and Maven build files to facilitate automated builds. The `mvnw` command is used to invoke the wrapper and should be invoked from the top-level 'cics-java-liberty-restapp' directory which will then invoke the individual Maven `pom.xml` files for each sub-project. 
 
 If building a CICS bundle ZIP the CICS JVM server name for the WAR bundle part should be modified in the 
- `cics.jvmserver` property, defined in [`cics-java-liberty-restapp-bundle/pom.xml`](cics-java-liberty-restapp-bundle/pom.xml) file under the `defaultjvmserver` configuration property, or alternatively can be set on the command line as shown.
+ `cics.jvmserver` property, defined in [`cics-java-liberty-restapp-cicsbundle/pom.xml`](cics-java-liberty-restapp-cicsbundle/pom.xml) file under the `defaultjvmserver` configuration property, or alternatively can be set on the command line as shown.
 
 
 **Maven Wrapper (Linux/Mac):**
@@ -108,10 +108,10 @@ mvnw.cmd clean verify
 ```
 **Maven wrapper (command-line & setting jvmserver):**
 ```shell
-mvnw clean verify -Dcics.jvmserver=MYJVM
+mvnw clean verify "-Dcics.jvmserver=MYJVM"
 ```
 
-A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
+A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-cicsbundle/target` directory.
 
 ### Option 2: Building with Eclipse
 
@@ -133,11 +133,11 @@ If the project built correctly the Eclipse Problems view should no longer have a
 
 ### Deploying the CICS Bundle with CICS Explorer
 1. First check the name of the JVMSERVER in the .warbundle file of the CICS bundle project (com.ibm.cicsdev.wlp.restapp.cicsbundle), and ensure this matches the name of your JVMSERVER resource defined in CICS. The default used is DFHWLP.
-2. Export the CICS bundle project to zFS by selecting **Export Bundle project to z/OS Unix File System** from the context menu in Eclipse. The samples uses the directory `/u/cics1/com.ibm.cicsdev.restapp.bundle_1.0.0`.
+2. Export the CICS bundle project to zFS by selecting **Export Bundle project to z/OS Unix File System** from the context menu in Eclipse. The samples uses the directory `/u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
 
 
 ### Deploying the CICS Bundle from Gradle or Maven
-1. Manually upload the ZIP file from the _cics-java-liberty-restapp-bundle/target_ or _cics-java-liberty-restapp-bundle/build/distributions_ directory to zFS.
+1. Manually upload the ZIP file from the _cics-java-liberty-restapp-cicsbundle/target_ or _cics-java-liberty-restapp-cicsbundle/build/distributions_ directory to zFS.
 2. Unzip this ZIP file on zFS (e.g. `${JAVA_HOME}/bin/jar -xvf /path/to/bundle.zip`).
 3. Create a CICS BUNDLE resource definition,  and install it into the CICS region. 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>cics-java-liberty-restapp-bundle</name>
+	<name>cics-java-liberty-restapp-cicsbundle</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,7 +10,7 @@
 			<arguments>
 				<dictionary>
 					<key>bundleID</key>
-					<value>com.ibm.cicsdev.restapp.bundle</value>
+					<value>com.ibm.cicsdev.restapp.cicsbundle</value>
 				</dictionary>
 				<dictionary>
 					<key>majorVersion</key>
