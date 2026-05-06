@@ -62,11 +62,11 @@ We documen the following 2 main approaches:
 
 ### Option 1a: Building with Gradle
 
-For a complete build you should run the settings.gradle file in the top-level 'cics-java-liberty-restapp' directory which is designed to invoke the individual build.gradle files for each sub-project. 
+For a complete build you should run the gradle build in the top-level `cics-java-liberty-restapp` directory which is designed to invoke the individual build.gradle files for each sub-project. 
 
 If successful, a WAR file is created inside the `cics-java-liberty-restapp-app/build/libs` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/build/distribution` directory. 
 
-The JVM server the CICS bundle is targeted at is controlled through the `cics.jvmserver` property, defined in the [`cics-java-liberty-restapp-bundle/build.gradle`](cics-java-liberty-restapp-bundle/build.gradle) file, or alternatively can be set on the command line:
+The JVM server the CICS bundle is targeted at is controlled through the `cics.jvmserver` property, defined in the [`cics-java-liberty-restapp-bundle/build.gradle`](cics-java-liberty-restapp-bundle/build.gradle) file, or alternatively can be set on the command line as follows:
 
 **Gradle wrapper (Linux/Mac):**
 ```shell
@@ -84,10 +84,10 @@ gradle.bat clean build
 
 ### Option 1b: Building with Apache Maven
 
-For a complete build you should run the pom.xml file in the top-level 'cics-java-liberty-restapp' directory. A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
+For a complete build you should run the Maven pom.xml file in the top-level `cics-java-liberty-restapp` directory. A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
 
 If building a CICS bundle ZIP the CICS JVM server name for the WAR bundle part should be modified in the 
- `cics.jvmserver` property, defined in [`cics-java-liberty-restapp-bundle/pom.xml`](cics-java-liberty-restapp-bundle/pom.xml) file under the `defaultjvmserver` configuration property, or alternatively can be set on the command line.
+ `cics.jvmserver` property, defined in [`cics-java-liberty-restapp-bundle/pom.xml`](cics-java-liberty-restapp-bundle/pom.xml) file under the `defaultjvmserver` configuration property, or alternatively can be set on the command line as follows:
 
 **Maven wrapper (Linux/Mac):**
 ```shell
@@ -118,7 +118,7 @@ The sample comes pre-configured for use with a JDK 1.8 and CICS TS V5.5 Librarie
 To resolve build issues:
 
 - Ensure you have the latest CICS Explorer SDK plug-in installed
-- Configure the cics-java-liberty-restapp-app project's build-path, and Application Project settings to use your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Select 'Java Build Path', on the Libraries tab select 'Classpath', click 'Add Library', select 'CICS with Enterprise Java and Liberty' Library, and choose the appropriate CICS and Enterprise Java versions. 
+- Configure the cics-java-liberty-restapp-app project's build-path, and Application Project settings to use your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Select **Java Build Path**, on the **Libraries** tab select **Classpath**, click **Add Library**, select **CICS with Enterprise Java and Liberty** Library, and choose the appropriate CICS and Enterprise Java versions. 
 
 
 
