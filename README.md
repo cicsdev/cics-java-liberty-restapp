@@ -25,10 +25,9 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 
 ## Contents
 
-- [cics-java-liberty-restapp](./cics-java-liberty-restapp) - Top-level project.
 - [cics-java-liberty-restapp-app](./cics-java-liberty-restapp-app) - Application source code.
 - [cics-java-liberty-restapp-bundle](./cics-java-liberty-restapp-bundle) - CICS bundle plug-in based project. Use with Gradle and Maven builds.
-- [etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle](./etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with CICS Explorer 'Export to zFS' deployment capability.
+- [etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle](./etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with Eclipse and CICS Explorer. 
 
 
 ## Prerequisites
@@ -36,14 +35,12 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 - Java SE 1.8 or later on the workstation
 - One of the following on your workstation:
     - Eclipse with the IBM CICS SDK for Java EE, Jakarta EE and Liberty
-    - An IDE of your choice that supports Gradle or Maven (or can run the Wrappers)
-    - A command line, to run the Wrappers or to invoke a locally installed version of Gradle or Maven
+    - An IDE of your choice that supports Gradle or Maven (or can run the wrappers)
+    
 
 ## Supporting files
 * [`DFHCSD.txt`](etc/DFHCSD.txt) - DFHCSDUP sample input stream for the CICS BUNDLE resource definition.
-* [`EDUCHAN.cbl`](cics-java-liberty-restapp-app/src/cobol/EDUCHAN.cbl) - A sample CICS COBOL that returns the date and time and reversed input using channels and containers
-* [`build.gradle`](build.gradle) - A sample Gradle build file to enable an automated build of the deployable WAR
-* [`pom.xml`](pom.xml) - A sample Maven build file to enable an automated build of the deployable WAR
+* [`EDUCHAN.cbl`](etc/src/cobol/EDUCHAN.cbl) - A sample CICS COBOL that returns the date and time and reversed input using channels and containers
    
 
 ## Downloading
@@ -51,113 +48,113 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 - Clone the repository using your IDEs support, such as the Eclipse Git plugin
 - **or**, download the sample as a [ZIP](https://github.com/cicsdev/cics-java-liberty-restapp/archive/main.zip) and unzip onto the workstation
 
-> [!TIP]
-> Eclipse Git provides an 'Import existing Projects' check-box when cloning a repository.
 
 ## Building 
 
-You can build the sample in a variety of ways:
-- Using the implicit compile/build of the Eclipse based CICS Explorer SDK
-- Using the built-in Gradle or Maven support of your IDE (For example: *buildship* or *m2e* in Eclipse which integrate with the "Run As..." menu.)
-- Using the supplied Gradle or Maven Wrapper scripts (no requirement for an IDE or Gradle/Maven install)
-- or you can build it from the command line if you have Gradle or Maven installed on your workstation
-  
+The sample includes Eclipse project configurations, Gradle and Maven build files and Gradle/Maven Wrappers offering a wide range of build options with the tooling and IDE of your choice.
 
-> [!IMPORTANT]
-> The sample comes pre-configured for use with a JDK 1.8 and CICS TS V5.5 Libraries for Java EE & Jakarta EE 8. When you initially import the project to your IDE, if your IDE is not configured for a JDK 1.8, or does not have CICS Explorer SDK installed, you might experience local project compile errors. To resolve issues you should configure the Project's build-path to add/remove your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Resolving errors might also depend on how you wish to build and deploy the sample. If you are building and deploying through CICS Explorer SDK and 'Export to zFS' you should edit the link-app's Project properties. Select 'Java Build Path', on the Libraries tab select 'Classpath', click 'Add Library', select 'CICS with Enterprise Java and Liberty' Library, and choose the appropriate CICS and Enterprise Java versions.
-If you are building and deploying with Gradle or Maven then you don't necessarily need to fix the local errors, but to do so, you can do as above, or you can run a tooling refresh on the hello-web project. For example, in Eclipse: right-click on "Project", select "Gradle -> Refresh Gradle Project", **or** right-click on "Project", select "Maven -> Update Project...".
+We document the following 2 approaches:
 
-> [!TIP]
-> In Eclipse, Gradle (buildship) is able to fully refresh and resolve the local classpath even if the project was previously updated by Maven. However, Maven (m2e) does not currently reciprocate that capability. If you previously refreshed the project with Gradle, you'll need to manually remove the 'Project Dependencies' entry on the Java build-path of your Project Properties to avoid duplication errors when performing a Maven Project Update.
+1. Use the command line to drive the supplied Gradle or Apache Maven wrappers, this means there is no requirement for Gradle, Maven, Eclipse, or CICS Explorer SDK to be installed. Alternatively the build files can also be used with locally installed Gradle or Maven runtimes.
+1. Use the built-in Eclipse and CICS Explorer SDK capability
 
 
-### Option 1: Building with Eclipse
+### Option 1a: Building with Gradle
 
-If you are using the Egit client to clone the repo, remember to tick the button to import all projects. Otherwise, you should manually Import the projects into CICS Explorer using File &rarr; Import &rarr; General &rarr; Existing projects into workspace, then follow the error resolution advice above.
-
-### Option 2: Building with Gradle
-
-For a complete build you should run the settings.gradle file in the top-level 'cics-java-liberty-restapp' directory which is designed to invoke the individual build.gradle files for each project. 
+For a complete build you should run the gradle build in the top-level `cics-java-liberty-restapp` directory which is designed to invoke the individual build.gradle files for each sub-project. 
 
 If successful, a WAR file is created inside the `cics-java-liberty-restapp-app/build/libs` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/build/distribution` directory. 
 
-[!NOTE]
-In Eclipse, the output 'build' directory is often hidden by default. From the Package Explorer pane, select the three dot menu, choose filters and un-check the Gradle build folder to view its contents.
+The JVM server the CICS bundle is targeted at is controlled through the `cics.jvmserver` property, defined in the [`cics-java-liberty-restapp-bundle/build.gradle`](cics-java-liberty-restapp-bundle/build.gradle) file, or alternatively can be set on the command line as follows:
 
-The JVM server the CICS bundle is targeted at is controlled through the `cics.jvmserver` property, defined in the [`cics-java-liberty-restapp-bundle/build.gradle`](cics-java-liberty-restapp-bundle/build.gradle) file, or alternatively can be set on the command line:
-
-**Gradle Wrapper (Linux/Mac):**
+**Gradle wrapper (Linux/Mac):**
 ```shell
 ./gradlew clean build
 ```
-**Gradle Wrapper (Windows):**
+**Gradle wrapper (Windows):**
 ```shell
 gradle.bat clean build
 ```
-**Gradle (command-line):**
+**Gradle wrapper (command-line & setting jvmserver):**
 ```shell
-gradle clean build
-```
-**Gradle (command-line & setting jvmserver):**
-```shell
-gradle clean build -Pcics.jvmserver=MYJVM
+./gradlew clean build "-Pcics.jvmserver=MYJVM"
 ```
 
-### Option 3: Building with Apache Maven
 
-For a complete build you should run the pom.xml file in the top-level 'cics-java-liberty-hello' directory. A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
+### Option 1b: Building with Apache Maven
+
+For a complete build you should run the Maven pom.xml file in the top-level `cics-java-liberty-restapp` directory. A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
 
 If building a CICS bundle ZIP the CICS JVM server name for the WAR bundle part should be modified in the 
- `cics.jvmserver` property, defined in [`cics-java-liberty-restapp-bundle/pom.xml`](cics-java-liberty-restapp-bundle/pom.xml) file under the `defaultjvmserver` configuration property, or alternatively can be set on the command line.
+ `cics.jvmserver` property, defined in [`cics-java-liberty-restapp-bundle/pom.xml`](cics-java-liberty-restapp-bundle/pom.xml) file under the `defaultjvmserver` configuration property, or alternatively can be set on the command line as follows:
 
-**Maven Wrapper (Linux/Mac):**
+**Maven wrapper (Linux/Mac):**
 ```shell
 ./mvnw clean verify
 ```
-**Maven Wrapper (Windows):**
+**Maven wrapper (Windows):**
 ```shell
 mvnw.cmd clean verify
 ```
-**Maven (command-line):**
+**Maven wrapoper (command-line & setting jvmserver):**
 ```shell
-mvn clean verify
+./mvnw clean verify "-Dcics.jvmserver=MYJVM"
 ```
-**Maven (command-line & setting jvmserver):**
-```shell
-mvn clean verify -Dcics.jvmserver=MYJVM
-```
+
+
+
+### Option 2: Building with Eclipse
+
+
+
+To import the sample into Eclipse either
+1. Clone the repository using your IDEs support, such as the Eclipse Git plugin,**or**
+2. Download the zip archive and use the **File > Import > Existing Projects into Workspace** wizard and select the expanded zip archive directory as the root directory. 
+Ensure you check "Search for nested projects", and do not select **Copy projects into workspace**
+
+The sample comes pre-configured for use with a JDK 1.8 and CICS TS V5.5 Libraries for Java EE & Jakarta EE 8. When you initially import the project into your IDE, if your IDE is not configured for Java 17, or does not have CICS Explorer SDK installed with the correct Target Platform set, you might experience local project compile errors.
+
+To resolve build issues:
+
+- Ensure you have the latest CICS Explorer SDK plug-in installed
+- Configure the cics-java-liberty-restapp-app project's build-path, and Application Project settings to use your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Select **Java Build Path**, on the **Libraries** tab select **Classpath**, click **Add Library**, select **CICS with Enterprise Java and Liberty** Library, and choose the appropriate CICS and Enterprise Java versions. 
+
+
 
 ## Deploying
 
+The sample Java classes are designed to be built into a an WAR file and deployed into a Liberty JVM server using a CICS bundle resource. To do this you will need to configure a Liberty JVM server in your CICS region, deploy the WAR archive to zFS, and then install this into CICS using a CICS BUNDLE resource. In addition the EDUCHAN COBOL can  be deployed to support the function to call into CICS.
+
 ### Configuring the Liberty JVM server
-1. Create a Liberty JVM server.
+1. Create a Liberty JVM server in your target CICS region
 2. Install the JVM server.
 3. Add the `jaxrs-1.1` (or later version) Liberty feature to `server.xml` depending on your version of Java EE.
 
 
-### Deploying CICS Bundles with CICS Explorer
-1. Optionally, change the name of the JVMSERVER in the .warbundle file of the CICS bundle project from DFHWLP to the name of your JVMSERVER resource defined in CICS. 
-2. Export the bundle project to zFS by selecting 'Export Bundle project to z/OS Unix File System' from the context menu.
-3. In CICS, create a bundle definition, setting the bundle directory attribute to the zFS location you just exported to, and install it. 
-
-### Deploying CICS Bundles from Gradle or Maven
-1. Manually upload the ZIP file from the _cics-java-liberty-restapp-bundle/target_ or _cics-java-liberty-restapp-bundle/build/distributions_ directory to zFS.
-2. Unzip this ZIP file on zFS (e.g. `${JAVA_HOME}/bin/jar xf /path/to/bundle.zip`).
-3. Create a CICS BUNDLE resource definition, setting the bundle directory attribute to the zFS location you just extracted to, and install it into the CICS region. 
-
-### Deploying directly with Liberty's application configuration
-1. Manually upload the WAR file from the _cics-java-liberty-restapp-app/target_ or _cics-java-liberty-restapp-app/build/libs_ directory to zFS.
-2. Add an `<application>` element to the Liberty server.xml to define the web application.
+### Deploying to zFS
 
 
-### To deploy the samples into a CICS region:
-1. Using the CICS Explorer export the CICS bundle project to a zFS directory. The samples use the directory `/u/cics1/com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
-1. Create a CICS BUNDLE definition.
-1. Install the CICS BUNDLE resource.
+#### Option 1 - Deploying CICS Bundle Maven/Gradle plugin builds
+1. Upload the built CICS bundle ZIP file in binary to zFS from your *target* or */build/distributions* directory in the cics-java-liberty-restapp-bundle project.
+1. Connect to USS on the host system (e.g. SSH).
+2. Create a bundle directory in zFS for the project
+1. Copy the CICS bundle ZIP file into the bundle directory.
+1. Extract the CICS bundle ZIP file. This can be done using the `jar` command. For example:
+   ```shell
+   jar -xvf bundle.zip
+   ```
+
+#### Option 2 - Deploying using CICS Explorer SDK and the CICS bundle projects
+
+1. Deploy the CICS bundle project `com.ibm.cicsdev.wlp.restapp.cicsbundle` from CICS Explorer to zFS using the **Export Bundle Project to z/OS UNIX File System** wizard.  The samples use the sub-directory `com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
+
+### Installing into CICS
+
+1. In CICS, create a BUNDLE resource definition, setting the bundle directory attribute to the zFS location you just exported to, and install it. 
+**Note:** A sample DFHCSDUP input file for the required CICS BUNDLE resource definition is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
 1. Download and compile the supplied COBOL program `EDUCHAN` and deploy into CICS.
 
 
-**Note:** A sample DFHCSDUP input file for the required CICS BUNDLE resource definition is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
 
 
 ## Running the Sample
