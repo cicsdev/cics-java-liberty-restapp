@@ -59,7 +59,7 @@ We document the following 2 approaches:
 1. Use the built-in Eclipse and CICS Explorer SDK capability
 
 
-### Option 1.1: Building with Gradle
+### Option 1a: Building with Gradle
 
 For a complete build you should run the gradle build in the top-level `cics-java-liberty-restapp` directory which is designed to invoke the individual build.gradle files for each sub-project. 
 
@@ -81,7 +81,7 @@ gradle.bat clean build
 ```
 
 
-### Option 1.2: Building with Apache Maven
+### Option 1b: Building with Apache Maven
 
 For a complete build you should run the Maven pom.xml file in the top-level `cics-java-liberty-restapp` directory. A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
 
