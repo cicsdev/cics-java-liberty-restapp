@@ -25,7 +25,6 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 
 ## Contents
 
-- [cics-java-liberty-restapp](./cics-java-liberty-restapp) - Top-level project.
 - [cics-java-liberty-restapp-app](./cics-java-liberty-restapp-app) - Application source code.
 - [cics-java-liberty-restapp-bundle](./cics-java-liberty-restapp-bundle) - CICS bundle plug-in based project. Use with Gradle and Maven builds.
 - [etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle](./etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with Eclipse and CICS Explorer. 
@@ -54,13 +53,13 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 
 The sample includes Eclipse project configurations, Gradle and Maven build files and Gradle/Maven Wrappers offering a wide range of build options with the tooling and IDE of your choice.
 
-We documen the following 2 main approaches:
+We document the following 2 approaches:
 
-1. Use the command line to drive the supplied Gradle or Apache Maven Wrappers, this means there is no requirement for Gradle, Maven, Eclipse, or CICS Explorer SDK to be installed.
+1. Use the command line to drive the supplied Gradle or Apache Maven wrappers, this means there is no requirement for Gradle, Maven, Eclipse, or CICS Explorer SDK to be installed. Alternatively the build files can also be used with locally installed Gradle or Maven runtimes.
 1. Use the built-in Eclipse and CICS Explorer SDK capability
 
 
-### Option 1a: Building with Gradle
+### Option 1.1: Building with Gradle
 
 For a complete build you should run the gradle build in the top-level `cics-java-liberty-restapp` directory which is designed to invoke the individual build.gradle files for each sub-project. 
 
@@ -82,7 +81,7 @@ gradle.bat clean build
 ```
 
 
-### Option 1b: Building with Apache Maven
+### Option 1.2: Building with Apache Maven
 
 For a complete build you should run the Maven pom.xml file in the top-level `cics-java-liberty-restapp` directory. A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
 
@@ -110,10 +109,10 @@ mvnw.cmd clean verify
 
 To import the sample into Eclipse either
 1. Clone the repository using your IDEs support, such as the Eclipse Git plugin,**or**
-2. Use the **File > Import > Existing Projects into Workspace** wizard and select the expanded zip archive directory as the root directory. 
+2. Download the zip archive and use the **File > Import > Existing Projects into Workspace** wizard and select the expanded zip archive directory as the root directory. 
 Ensure you check "Search for nested projects", and do not select **Copy projects into workspace**
 
-The sample comes pre-configured for use with a JDK 1.8 and CICS TS V5.5 Libraries for Java EE & Jakarta EE 8. When you initially import the project to your IDE, if your IDE is not configured for Java 17, or does not have CICS Explorer SDK installed with the correct Target Platform set, you might experience local project compile errors.
+The sample comes pre-configured for use with a JDK 1.8 and CICS TS V5.5 Libraries for Java EE & Jakarta EE 8. When you initially import the project into your IDE, if your IDE is not configured for Java 17, or does not have CICS Explorer SDK installed with the correct Target Platform set, you might experience local project compile errors.
 
 To resolve build issues:
 
@@ -124,7 +123,7 @@ To resolve build issues:
 
 ## Deploying
 
-The sample Java classes are designed to be built into a an WAR file and deployed into a Liberty  JVM server using a CICS bundle resource.
+The sample Java classes are designed to be built into a an WAR file and deployed into a Liberty JVM server using a CICS bundle resource. To do this you will need to configure a Liberty JVM server in your CICS region, deploy the WAR archive to zFS, and then install this into CICS using a CICS BUNDLE resource. In addition the EDUCHAN COBOL can  be deployed to support the function to call into CICS.
 
 ### Configuring the Liberty JVM server
 1. Create a Liberty JVM server in your target CICS region
