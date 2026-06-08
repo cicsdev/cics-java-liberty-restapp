@@ -24,7 +24,7 @@ jobs:
         with:
           directory: './cics-java-liberty-restapp/'
           file-extensions: '*.java'
-          base-copyright: 'Copyright IBM Corp. 2025'
+          base-copyright: 'Copyright IBM Corp. 2026'
           token: ${{ secrets.GITHUB_TOKEN }}
 
   build-maven:
@@ -98,7 +98,5 @@ jobs:
       with:
         java-version: ${{ matrix.jdk }}
         distribution: 'semeru'
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v4
-    - name: Build with Gradle
+    - name: Build with Gradle Wrapper
       run: ./gradlew build -Pjava_version=${{ matrix.jdk }}
