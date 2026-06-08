@@ -79,8 +79,10 @@ jobs:
         distribution: 'semeru'
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: 8.14.4
     - name: Build with Gradle
-      run: ./gradlew build -Pjava_version=${{ matrix.jdk }}
+      run: gradle build -Pjava_version=${{ matrix.jdk }}
 
   build-gradlew:
     name: Build Gradle wrapper
