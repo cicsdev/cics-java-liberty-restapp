@@ -10,7 +10,12 @@ plugins
 group = 'com.ibm.cicsdev.restapp'
 archivesBaseName='cics-java-liberty-restapp'
 version = '0.1.0'
-sourceCompatibility = '1.8'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(java_version)
+    }
+}
 
 // If in Eclipse, add Javadoc to the local project classpath
 eclipse 
