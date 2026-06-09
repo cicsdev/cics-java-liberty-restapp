@@ -50,14 +50,11 @@
 	<!-- ================================================================ -->
 	<build>
 		<plugins>
-			<!-- Maven Compiler Plugin with release parameter -->
+			<!-- Maven Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.13.0</version>
-				<configuration>
-					<release>${java.version}</release>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
