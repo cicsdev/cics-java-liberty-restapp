@@ -1,7 +1,9 @@
-cics-java-liberty-restapp
-===========================
+# cics-java-liberty-restapp
 
 [![Build](https://github.com/cicsdev/cics-java-liberty-restapp/actions/workflows/build.yaml/badge.svg)](https://github.com/cicsdev/cics-java-liberty-restapp/actions/workflows/build.yaml)
+[![License](https://img.shields.io/badge/License-EPL%202.0-green.svg)](https://opensource.org/licenses/EPL-2.0)
+
+## Overview
 
 Sample RESTful web application for deployment to a Liberty JVM server in CICS. The application is supplied with two resources:
 
