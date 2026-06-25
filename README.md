@@ -28,8 +28,8 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 ## Contents
 
 - [cics-java-liberty-restapp-app](./cics-java-liberty-restapp-app) - Application source code.
-- [cics-java-liberty-restapp-bundle](./cics-java-liberty-restapp-bundle) - CICS bundle plug-in based project. Use with Gradle and Maven builds.
-- [com.ibm.cicsdev.wlp.restapp.cicsbundle](./com.ibm.cicsdev.wlp.restapp.cicsbundle) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with Eclipse and CICS Explorer.
+- [cics-java-liberty-restapp-cicsbundle](./cics-java-liberty-restapp-cicsbundle) - CICS bundle plug-in based project. Use with Gradle and Maven builds.
+- [cics-java-liberty-restapp-cicsbundle-eclipse](./cics-java-liberty-restapp-cicsbundle-eclipse) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with Eclipse and CICS Explorer.
 
 
 ## Prerequisites
@@ -178,7 +178,7 @@ The sample Java classes are designed to be built into a an WAR file and deployed
 
 #### Option 2 - Deploying using CICS Explorer SDK and the CICS bundle projects
 
-1. Deploy the CICS bundle project `com.ibm.cicsdev.wlp.restapp.cicsbundle` from CICS Explorer to zFS using the **Export Bundle Project to z/OS UNIX File System** wizard. The samples use the sub-directory `com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
+1. Deploy the CICS bundle project `cics-java-liberty-restapp-cicsbundle-eclipse` from CICS Explorer to zFS using the **Export Bundle Project to z/OS UNIX File System** wizard. The samples use the sub-directory `cics-java-liberty-restapp-cicsbundle-eclipse_1.0.0`.
 
 ### Installing into CICS
 

@@ -15,4 +15,4 @@ rootProject.name = 'cics-java-liberty-restapp'
 // Subprojects
 // ============================================================================
 include(':cics-java-liberty-restapp-app')
-include(':cics-java-liberty-restapp-bundle')
+include(':cics-java-liberty-restapp-cicsbundle')

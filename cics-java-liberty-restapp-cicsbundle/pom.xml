@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>cics-java-liberty-restapp-bundle</artifactId>
+    <artifactId>cics-java-liberty-restapp-cicsbundle</artifactId>
     <name>CICS Enterprise Java Program - CICS Bundle</name>
 
     <packaging>cics-bundle</packaging>
