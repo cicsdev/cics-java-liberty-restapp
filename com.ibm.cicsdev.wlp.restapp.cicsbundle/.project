@@ -10,7 +10,7 @@
 			<arguments>
 				<dictionary>
 					<key>bundleID</key>
-					<value>com.ibm.cics.server.examples.wlp.link.bundle</value>
+					<value>com.ibm.cicsdev.wlp.restapp.cicsbundle</value>
 				</dictionary>
 				<dictionary>
 					<key>majorVersion</key>

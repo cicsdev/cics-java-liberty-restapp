@@ -29,7 +29,7 @@ The following Java source components are supplied in the [`cics-java-liberty-res
 
 - [cics-java-liberty-restapp-app](./cics-java-liberty-restapp-app) - Application source code.
 - [cics-java-liberty-restapp-bundle](./cics-java-liberty-restapp-bundle) - CICS bundle plug-in based project. Use with Gradle and Maven builds.
-- [etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle](./etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with Eclipse and CICS Explorer. 
+- [com.ibm.cicsdev.wlp.restapp.cicsbundle](./com.ibm.cicsdev.wlp.restapp.cicsbundle) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with Eclipse and CICS Explorer.
 
 
 ## Prerequisites
@@ -107,19 +107,49 @@ mvnw.cmd clean verify
 
 ### Option 2: Building with Eclipse
 
+#### Importing the Project
 
+To import the sample into Eclipse:
+1. Clone the repository using your IDE's support, such as the Eclipse Git plugin, **or**
+2. Download the zip archive and use the **File > Import > Existing Projects into Workspace** wizard and select the expanded zip archive directory as the root directory
 
-To import the sample into Eclipse either
-1. Clone the repository using your IDEs support, such as the Eclipse Git plugin,**or**
-2. Download the zip archive and use the **File > Import > Existing Projects into Workspace** wizard and select the expanded zip archive directory as the root directory. 
-Ensure you check "Search for nested projects", and do not select **Copy projects into workspace**
+**Important:** Ensure you check "Search for nested projects", and do not select **Copy projects into workspace**
 
-The sample comes pre-configured for use with a JDK 1.8 and CICS TS V5.5 Libraries for Java EE & Jakarta EE 8. When you initially import the project into your IDE, if your IDE is not configured for Java 17, or does not have CICS Explorer SDK installed with the correct Target Platform set, you might experience local project compile errors.
+#### Resolving Dependencies
 
-To resolve build issues:
+The sample comes pre-configured with the CICS TS V5.5 with Java EE and Liberty 8 library in the Eclipse classpath. This means the project should compile immediately after import if you have the CICS Explorer SDK installed.
 
-- Ensure you have the latest CICS Explorer SDK plug-in installed
-- Configure the cics-java-liberty-restapp-app project's build-path, and Application Project settings to use your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Select **Java Build Path**, on the **Libraries** tab select **Classpath**, click **Add Library**, select **CICS with Enterprise Java and Liberty** Library, and choose the appropriate CICS and Enterprise Java versions. 
+However, if you see compilation errors, or if you want to use Gradle or Maven for dependency management instead of the pre-configured CICS library, you have several options:
+
+**Option 2a: Using Build Tool Integration**
+
+If you have Gradle (Buildship) or Maven (m2e) integration installed in Eclipse, you can use the build tool to automatically resolve dependencies:
+
+**For Gradle:**
+1. Right-click on `cics-java-liberty-restapp` → **Run As** → **Gradle Build...**
+2. In the dialog, enter `clean build` in the "Gradle Tasks" field
+3. Click **Run** - this will download Java 8 (if needed via toolchain auto-provisioning) and resolve all dependencies
+4. Once the build succeeds, right-click on `cics-java-liberty-restapp` → **Gradle** → **Refresh Gradle Project**
+5. Clean and rebuild: **Project** → **Clean** → Select all projects → **Clean**
+
+**For Maven:**
+1. Right-click on `cics-java-liberty-restapp` → **Maven** → **Update Project** → Check "Force Update of Snapshots/Releases"
+2. Clean and rebuild: **Project** → **Clean** → Select all projects → **Clean**
+
+The build tool will automatically download and configure all required dependencies (CICS libraries, JAX-RS, JAXB, etc.) and update Eclipse's classpath.
+
+**Note:** For Gradle projects, the initial "Run As → Gradle Build" step is required to trigger toolchain auto-provisioning if Java 8 is not installed. After a successful build, "Gradle → Refresh Gradle Project" will synchronize the Eclipse classpath with the resolved dependencies.
+
+**Option 2b: Verifying Pre-Configured CICS Library (Default)**
+
+The project is already configured with the CICS library. If you see errors:
+
+1. Ensure you have the latest CICS Explorer SDK plug-in installed
+2. Verify the CICS library is present: Right-click on `cics-java-liberty-restapp-app` → **Build Path** → **Configure Build Path** → **Libraries** tab
+3. If the CICS library shows an error or is missing, remove it and re-add: Click **Add Library** → **CICS with Enterprise Java and Liberty** → Select **CICS TS V5.5 with Java EE and Liberty 8**
+4. Clean and rebuild: **Project** → **Clean** → Select all projects → **Clean**
+
+**Note:** The pre-configured CICS library (Option 2b) provides the fastest setup for Eclipse users. Gradle/Maven integration (Option 2a) is useful if you want to use the same dependency management approach across different IDEs or build environments.
 
 
 
@@ -148,7 +178,7 @@ The sample Java classes are designed to be built into a an WAR file and deployed
 
 #### Option 2 - Deploying using CICS Explorer SDK and the CICS bundle projects
 
-1. Deploy the CICS bundle project `com.ibm.cicsdev.wlp.restapp.cicsbundle` from CICS Explorer to zFS using the **Export Bundle Project to z/OS UNIX File System** wizard.  The samples use the sub-directory `com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
+1. Deploy the CICS bundle project `com.ibm.cicsdev.wlp.restapp.cicsbundle` from CICS Explorer to zFS using the **Export Bundle Project to z/OS UNIX File System** wizard. The samples use the sub-directory `com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
 
 ### Installing into CICS
 
