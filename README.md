@@ -124,7 +124,20 @@ If you see compilation errors, or want to use Gradle or Maven for dependency man
 
 ## Deploying to a CICS Liberty JVM server
 
-The application must be built into a WAR file and deployed to Liberty using a CICS bundle. You will need a Liberty JVM server configured in your CICS region, and you must add the `jaxrs-1.1` (or later) Liberty feature to `server.xml`.
+The application must be built into a WAR file and deployed to Liberty using a CICS bundle. You will need a Liberty JVM server configured in your CICS region.
+
+**Required Liberty features** — this sample uses the `javax.*` namespace (Java EE 8). Add the following to your `server.xml`:
+
+```xml
+<featureManager>
+    <feature>jaxrs-2.1</feature>
+    <feature>servlet-4.0</feature>
+</featureManager>
+```
+
+> **Note:** Do not use Jakarta EE 10 features (`restfulWS-3.1`, `servlet-6.0`) with this sample — those features use the `jakarta.*` namespace and are incompatible with the `javax.*` API used here. Liberty will fail to dispatch requests and return `SRVE0190E: File not found`.
+
+A sample `server.xml` is provided in [`etc/config/server.xml`](etc/config/server.xml).
 
 Download and compile the supplied COBOL program `EDUCHAN` and deploy it into CICS to support the reverse function.
 
@@ -157,11 +170,11 @@ A sample DFHCSDUP input file is provided in [`etc/DFHCSD.txt`](etc/DFHCSD.txt).
 
 ## Running the Sample
 
-Once deployed, use the context root `com.ibm.cicsdev.restapp`. Issue the following HTTP GET requests:
+Once deployed, use the context root `cics-java-liberty-restapp`. Issue the following HTTP GET requests:
 
 **Get CICS environment information:**
 ```
-http://host:port/com.ibm.cicsdev.restapp/rest/cicsinfo
+http://host:port/cics-java-liberty-restapp/rest/cicsinfo
 ```
 Example response:
 ```json
@@ -170,7 +183,7 @@ Example response:
 
 **Reverse the default string "Hello from Java":**
 ```
-http://host:port/com.ibm.cicsdev.restapp/rest/reverse
+http://host:port/cics-java-liberty-restapp/rest/reverse
 ```
 Example response:
 ```json
@@ -179,7 +192,7 @@ Example response:
 
 **Reverse a custom string:**
 ```
-http://host:port/com.ibm.cicsdev.restapp/rest/reverse/ilovecics
+http://host:port/cics-java-liberty-restapp/rest/reverse/ilovecics
 ```
 Example response:
 ```json
