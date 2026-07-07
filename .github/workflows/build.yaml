@@ -36,7 +36,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        jdk: [8, 11, 17, 21, 25]
+        # JDK 8 excluded: maven-compiler-plugin <release> requires JDK 9+
+        # Use JDK 11+ with -Djava.version=8 to validate Java 8 source compatibility
+        jdk: [11, 17, 21, 25]
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ matrix.jdk }}
@@ -46,7 +48,7 @@ jobs:
           distribution: "semeru"
           cache: maven
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots --file pom.xml -Djava.version=${{ matrix.jdk }} verify
+        run: mvn --batch-mode --update-snapshots --file pom.xml -Djava.version=8 verify
 
   build-mvnw:
     name: Build Maven Wrapper
@@ -54,7 +56,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        jdk: [8, 11, 17, 21, 25]
+        # JDK 8 excluded: maven-compiler-plugin <release> requires JDK 9+
+        # Use JDK 11+ with -Djava.version=8 to validate Java 8 source compatibility
+        jdk: [11, 17, 21, 25]
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ matrix.jdk }}
@@ -64,7 +68,7 @@ jobs:
           distribution: "semeru"
           cache: maven
       - name: Build with Maven Wrapper
-        run: ./mvnw --batch-mode --update-snapshots --file pom.xml -Djava.version=${{ matrix.jdk }} verify
+        run: ./mvnw --batch-mode --update-snapshots --file pom.xml -Djava.version=8 verify
 
   build-gradle:
     name: Build Gradle
