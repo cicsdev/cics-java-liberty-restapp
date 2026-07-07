@@ -10,7 +10,7 @@
 			<arguments>
 				<dictionary>
 					<key>bundleID</key>
-					<value>cics-java-liberty-restapp-cicsbundle-eclipse</value>
+					<value>cics-java-liberty-restapp-bundle</value>
 				</dictionary>
 				<dictionary>
 					<key>majorVersion</key>

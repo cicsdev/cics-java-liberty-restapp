@@ -19,6 +19,6 @@ jobs:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
           retain_days: 30
-          keep_minimum_runs: 3  # Keep at least 3 recent runs of each workflow
+          keep_minimum_runs: 6  # Keep at least 6 recent runs of each workflow
 
 # Made with Bob

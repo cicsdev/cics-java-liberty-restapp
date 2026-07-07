@@ -15,6 +15,9 @@ jobs:
   check-copyright:
     runs-on: ubuntu-latest
     name: Check Copyright
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:

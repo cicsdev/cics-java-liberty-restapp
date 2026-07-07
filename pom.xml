@@ -20,10 +20,8 @@
 	<properties>
 		<java.version>8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<cics.jvmserver>DFHWLP</cics.jvmserver>
-	  </properties>
+	</properties>
 
 	<!-- CICS TS V5.5 BOM (as of May 2020) -->
 	<dependencyManagement>
@@ -55,6 +53,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.13.0</version>
+				<configuration>
+					<release>${java.version}</release>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
