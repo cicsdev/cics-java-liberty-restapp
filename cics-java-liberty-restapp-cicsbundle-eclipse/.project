@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>com.ibm.cicsdev.wlp.restapp.cicsbundle</name>
+	<name>cics-java-liberty-restapp-cicsbundle-eclipse</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,7 +10,7 @@
 			<arguments>
 				<dictionary>
 					<key>bundleID</key>
-					<value>com.ibm.cics.server.examples.wlp.link.bundle</value>
+					<value>cics-java-liberty-restapp-bundle</value>
 				</dictionary>
 				<dictionary>
 					<key>majorVersion</key>

@@ -5,69 +5,64 @@
 
 ## Overview
 
-Sample RESTful web application for deployment to a Liberty JVM server in CICS. The application is supplied with two resources:
+Sample RESTful web application for deployment to a Liberty JVM server in CICS. The application is supplied with two REST resources:
 
-1. `InfoResource` - This queries the JVM server environment using system properties and uses JAXB beans to return a JSON response detailing the CICS environment.
-1. `ReverseResource` - This is similar to `InfoResource`, but uses the JCICS API to link to the COBOL program `EDUCHAN` using channels and containers. An input string is passed to `EDUCHAN`, which is then reversed and returned, along with the time from CICS.
+**Key Features:**
+- `InfoResource` — queries the JVM server environment using system properties and uses JAXB beans to return a JSON response detailing the CICS environment
+- `ReverseResource` — uses the JCICS API to link to the COBOL program `EDUCHAN` using channels and containers; an input string is passed to `EDUCHAN`, which is reversed and returned along with the time from CICS
 
-Further extensions to this application are available in the repository [cics-java-liberty-restappext](https://github.com/cicsdev/cics-java-liberty-restappext) which provides several code examples for accessing CICS resources from Java using the JCICS API.
+Further extensions to this application are available in [cics-java-liberty-restappext](https://github.com/cicsdev/cics-java-liberty-restappext), which provides additional code examples for accessing CICS resources from Java using the JCICS API.
 
-The following Java source components are supplied in the [`cics-java-liberty-restapp-app/src/main/java`](cics-java-liberty-restapp-app/src/main/java) directory in this repository.
+## Table of Contents
 
-## Java package com.ibm.cicsdev.restapp
-* [`CICSApplication`](src/main/java/com/ibm/cicsdev/restapp/CICSApplication.java) - Sets the `ApplicationPath` for resources in this application
-* [`InfoResource`](src/main/java/com/ibm/cicsdev/restapp/InfoResource.java) - Returns JSON structure using `CICSInformation` bean
-* [`ReverseResource`](src/main/java/com/ibm/cicsdev/restapp/ReverseResource.java) - Returns JSON structure using `ReverseResult` bean
-
-
-## Java package com.ibm.cicsdev.restapp.bean
-* [`CICSEnvironment`](src/main/java/com/ibm/cicsdev/restapp/bean/CICSEnvironment.java) - JAXB bean returning JSON structure containing information about CICS product and version
-* [`CICSInformation`](src/main/java/com/ibm/cicsdev/restapp/bean/CICSInformation.java) - JAXB bean returning JSON structure containing CICS applid, time and JVM server name and instance of `CICSEnvironment`
-* [`ReverseResult`](src/main/java/com/ibm/cicsdev/restapp/bean/ReverseResult.java) - JAXB bean returning JSON structure containg input and output containers sent to `EDUCHAN` COBOL program
-
-## Contents
-
-- [cics-java-liberty-restapp-app](./cics-java-liberty-restapp-app) - Application source code.
-- [cics-java-liberty-restapp-bundle](./cics-java-liberty-restapp-bundle) - CICS bundle plug-in based project. Use with Gradle and Maven builds.
-- [etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle](./etc/eclipse_projects/com.ibm.cicsdev.wlp.restapp.cicsbundle) - CICS Explorer based CICS bundle project, contains Web application bundle-part. Use with Eclipse and CICS Explorer. 
-
+- [Prerequisites](#prerequisites)
+- [Downloading](#downloading)
+- [Check dependencies](#check-dependencies)
+- [Building the Sample](#building-the-sample)
+- [Deploying to a CICS Liberty JVM server](#deploying-to-a-cics-liberty-jvm-server)
+- [Running the Sample](#running-the-sample)
+- [License](#license)
 
 ## Prerequisites
-- CICS TS V5.5 or later
-- Java SE 1.8 or later on the workstation
-- One of the following on your workstation:
-    - Eclipse with the IBM CICS SDK for Java EE, Jakarta EE and Liberty
-    - An IDE of your choice that supports Gradle or Maven (or can run the wrappers)
-    
 
-## Supporting files
-* [`DFHCSD.txt`](etc/DFHCSD.txt) - DFHCSDUP sample input stream for the CICS BUNDLE resource definition.
-* [`EDUCHAN.cbl`](etc/src/cobol/EDUCHAN.cbl) - A sample CICS COBOL that returns the date and time and reversed input using channels and containers
-   
+- CICS TS V5.5 or later with a configured Liberty JVM server
+- Java SE 8 or later on the workstation
+- One of the following on your workstation:
+  - Eclipse with the IBM CICS SDK for Java EE, Jakarta EE and Liberty
+  - An IDE of your choice that supports Gradle or Maven (or can run the wrappers)
 
 ## Downloading
 
-- Clone the repository using your IDEs support, such as the Eclipse Git plugin
+- Clone the repository using your IDE's support, such as the Eclipse Git plugin
 - **or**, download the sample as a [ZIP](https://github.com/cicsdev/cics-java-liberty-restapp/archive/main.zip) and unzip onto the workstation
 
+### Check dependencies
 
-## Building 
+The following source components are supplied in [`cics-java-liberty-restapp-app/src/main/java`](cics-java-liberty-restapp-app/src/main/java):
 
-The sample includes Eclipse project configurations, Gradle and Maven build files and Gradle/Maven Wrappers offering a wide range of build options with the tooling and IDE of your choice.
+**Package `com.ibm.cicsdev.restapp`**
+- [`CICSApplication`](cics-java-liberty-restapp-app/src/main/java/com/ibm/cicsdev/restapp/CICSApplication.java) — sets the `ApplicationPath` for resources in this application
+- [`InfoResource`](cics-java-liberty-restapp-app/src/main/java/com/ibm/cicsdev/restapp/InfoResource.java) — returns JSON structure using the `CICSInformation` bean
+- [`ReverseResource`](cics-java-liberty-restapp-app/src/main/java/com/ibm/cicsdev/restapp/ReverseResource.java) — returns JSON structure using the `ReverseResult` bean
 
-We document the following 2 approaches:
+**Package `com.ibm.cicsdev.restapp.bean`**
+- [`CICSEnvironment`](cics-java-liberty-restapp-app/src/main/java/com/ibm/cicsdev/restapp/bean/CICSEnvironment.java) — JAXB bean returning JSON structure containing CICS product and version information
+- [`CICSInformation`](cics-java-liberty-restapp-app/src/main/java/com/ibm/cicsdev/restapp/bean/CICSInformation.java) — JAXB bean returning JSON structure containing CICS applid, time, JVM server name, and an instance of `CICSEnvironment`
+- [`ReverseResult`](cics-java-liberty-restapp-app/src/main/java/com/ibm/cicsdev/restapp/bean/ReverseResult.java) — JAXB bean returning JSON structure containing the input and output containers sent to the `EDUCHAN` COBOL program
 
-1. Use the command line to drive the supplied Gradle or Apache Maven wrappers, this means there is no requirement for Gradle, Maven, Eclipse, or CICS Explorer SDK to be installed. Alternatively the build files can also be used with locally installed Gradle or Maven runtimes.
-1. Use the built-in Eclipse and CICS Explorer SDK capability
+**Supporting files:**
+- [`DFHCSD.txt`](etc/DFHCSD.txt) — DFHCSDUP sample input stream for the CICS BUNDLE resource definition
+- [`EDUCHAN.cbl`](etc/src/cobol/EDUCHAN.cbl) — sample CICS COBOL program that returns the date, time, and reversed input using channels and containers
 
+## Building the Sample
+
+The sample includes Eclipse project configurations, Gradle and Maven build files, and Gradle/Maven wrappers — offering a wide range of build options with any tooling or IDE.
 
 ### Option 1a: Building with Gradle
 
-For a complete build you should run the gradle build in the top-level `cics-java-liberty-restapp` directory which is designed to invoke the individual build.gradle files for each sub-project. 
+Run the Gradle build from the top-level `cics-java-liberty-restapp` directory. A WAR file is created in `cics-java-liberty-restapp-app/build/libs` and a CICS bundle ZIP in `cics-java-liberty-restapp-cicsbundle/build/distributions`.
 
-If successful, a WAR file is created inside the `cics-java-liberty-restapp-app/build/libs` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/build/distribution` directory. 
-
-The JVM server the CICS bundle is targeted at is controlled through the `cics.jvmserver` property, defined in the [`cics-java-liberty-restapp-bundle/build.gradle`](cics-java-liberty-restapp-bundle/build.gradle) file, or alternatively can be set on the command line as follows:
+The target JVM server is controlled by the `cics.jvmserver` property (default `DFHWLP`):
 
 **Gradle wrapper (Linux/Mac):**
 ```shell
@@ -75,20 +70,16 @@ The JVM server the CICS bundle is targeted at is controlled through the `cics.jv
 ```
 **Gradle wrapper (Windows):**
 ```shell
-gradle.bat clean build
+gradlew.bat clean build
 ```
-**Gradle wrapper (command-line & setting jvmserver):**
+**Setting the JVM server name:**
 ```shell
 ./gradlew clean build "-Pcics.jvmserver=MYJVM"
 ```
 
-
 ### Option 1b: Building with Apache Maven
 
-For a complete build you should run the Maven pom.xml file in the top-level `cics-java-liberty-restapp` directory. A WAR file is created inside the `cics-java-liberty-restapp-app/target` directory and a CICS bundle ZIP file inside the `cics-java-liberty-restapp-bundle/target` directory.
-
-If building a CICS bundle ZIP the CICS JVM server name for the WAR bundle part should be modified in the 
- `cics.jvmserver` property, defined in [`cics-java-liberty-restapp-bundle/pom.xml`](cics-java-liberty-restapp-bundle/pom.xml) file under the `defaultjvmserver` configuration property, or alternatively can be set on the command line as follows:
+Run the Maven build from the top-level `cics-java-liberty-restapp` directory. A WAR file is created in `cics-java-liberty-restapp-app/target` and a CICS bundle ZIP in `cics-java-liberty-restapp-cicsbundle/target`.
 
 **Maven wrapper (Linux/Mac):**
 ```shell
@@ -98,96 +89,125 @@ If building a CICS bundle ZIP the CICS JVM server name for the WAR bundle part s
 ```shell
 mvnw.cmd clean verify
 ```
-**Maven wrapoper (command-line & setting jvmserver):**
+**Setting the JVM server name:**
 ```shell
 ./mvnw clean verify "-Dcics.jvmserver=MYJVM"
 ```
 
-
-
 ### Option 2: Building with Eclipse
 
+#### Importing the Project
 
+To import the sample into Eclipse:
+1. Clone the repository using your IDE's support, such as the Eclipse Git plugin, **or** download the ZIP archive and unzip it
+2. **File → Import → General → Existing Projects into Workspace** → select the repository root directory → **Finish**
+   - This imports the root project only; subprojects are discovered in the next step
+3. Right-click `cics-java-liberty-restapp` → **Gradle** → **Refresh Gradle Project** (or **Maven** → **Update Project**) to import `-app` and `-cicsbundle`
+4. To import the Eclipse CICS bundle project, right-click the `cics-java-liberty-restapp-cicsbundle-eclipse` folder in Project Explorer → **Import as Project**
+   - This project is excluded from the Gradle/Maven build so it is never auto-discovered
 
-To import the sample into Eclipse either
-1. Clone the repository using your IDEs support, such as the Eclipse Git plugin,**or**
-2. Download the zip archive and use the **File > Import > Existing Projects into Workspace** wizard and select the expanded zip archive directory as the root directory. 
-Ensure you check "Search for nested projects", and do not select **Copy projects into workspace**
+#### Resolving Dependencies
 
-The sample comes pre-configured for use with a JDK 1.8 and CICS TS V5.5 Libraries for Java EE & Jakarta EE 8. When you initially import the project into your IDE, if your IDE is not configured for Java 17, or does not have CICS Explorer SDK installed with the correct Target Platform set, you might experience local project compile errors.
+The project is pre-configured with the CICS TS V5.5 with Java EE and Liberty 8 library in the Eclipse classpath. The project should compile immediately after import if you have the CICS Explorer SDK installed.
 
-To resolve build issues:
+If you see compilation errors, or want to use Gradle or Maven for dependency management, use one of the options below.
 
-- Ensure you have the latest CICS Explorer SDK plug-in installed
-- Configure the cics-java-liberty-restapp-app project's build-path, and Application Project settings to use your preferred combination of CICS TS, JDK, and Liberty's Enterprise Java libraries (Java EE or Jakarta EE). Select **Java Build Path**, on the **Libraries** tab select **Classpath**, click **Add Library**, select **CICS with Enterprise Java and Liberty** Library, and choose the appropriate CICS and Enterprise Java versions. 
+**For Gradle (Buildship):**
+1. Right-click `cics-java-liberty-restapp` → **Run As** → **Gradle Build...**
+2. Enter `clean build` in the Gradle Tasks field and click **Run**
+3. Once the build succeeds, right-click `cics-java-liberty-restapp` → **Gradle** → **Refresh Gradle Project**
+4. Clean and rebuild: **Project** → **Clean** → select all → **Clean**
 
+**For Maven (m2e):**
+1. Right-click `cics-java-liberty-restapp` → **Maven** → **Update Project** → check **Force Update of Snapshots/Releases**
+2. Clean and rebuild: **Project** → **Clean** → select all → **Clean**
 
+## Deploying to a CICS Liberty JVM server
 
-## Deploying
+The application must be built into a WAR file and deployed to Liberty using a CICS bundle. You will need a Liberty JVM server configured in your CICS region.
 
-The sample Java classes are designed to be built into a an WAR file and deployed into a Liberty JVM server using a CICS bundle resource. To do this you will need to configure a Liberty JVM server in your CICS region, deploy the WAR archive to zFS, and then install this into CICS using a CICS BUNDLE resource. In addition the EDUCHAN COBOL can  be deployed to support the function to call into CICS.
+**Required Liberty features** — this sample uses the `javax.*` namespace (Java EE 8). Add the following to your `server.xml`:
 
-### Configuring the Liberty JVM server
-1. Create a Liberty JVM server in your target CICS region
-2. Install the JVM server.
-3. Add the `jaxrs-1.1` (or later version) Liberty feature to `server.xml` depending on your version of Java EE.
+```xml
+<featureManager>
+    <feature>jaxrs-2.1</feature>
+    <feature>servlet-4.0</feature>
+</featureManager>
+```
 
+> **Note:** Do not use Jakarta EE 10 features (`restfulWS-3.1`, `servlet-6.0`) with this sample — those features use the `jakarta.*` namespace and are incompatible with the `javax.*` API used here. Liberty will fail to dispatch requests and return `SRVE0190E: File not found`.
 
-### Deploying to zFS
+A sample `server.xml` is provided in [`etc/config/server.xml`](etc/config/server.xml).
 
+Download and compile the supplied COBOL program `EDUCHAN` and deploy it into CICS to support the reverse function.
 
-#### Option 1 - Deploying CICS Bundle Maven/Gradle plugin builds
-1. Upload the built CICS bundle ZIP file in binary to zFS from your *target* or */build/distributions* directory in the cics-java-liberty-restapp-bundle project.
-1. Connect to USS on the host system (e.g. SSH).
-2. Create a bundle directory in zFS for the project
-1. Copy the CICS bundle ZIP file into the bundle directory.
-1. Extract the CICS bundle ZIP file. This can be done using the `jar` command. For example:
+### CICS Bundle Plugin Deployment (Gradle/Maven)
+
+1. Build the project using Gradle or Maven as described above — the CICS bundle ZIP is produced automatically
+2. Upload the CICS bundle ZIP in binary to zFS (from `cics-java-liberty-restapp-cicsbundle/build/distributions` for Gradle, or `cics-java-liberty-restapp-cicsbundle/target` for Maven)
+3. Connect to USS (e.g. via SSH) and extract the ZIP:
    ```shell
-   jar -xvf bundle.zip
+   jar -xvf cics-java-liberty-restapp-cicsbundle-1.0.0.zip
    ```
+4. In CICS, create a BUNDLE resource definition pointing to the extracted directory and install it
 
-#### Option 2 - Deploying using CICS Explorer SDK and the CICS bundle projects
+A sample DFHCSDUP input file is provided in [`etc/DFHCSD.txt`](etc/DFHCSD.txt).
 
-1. Deploy the CICS bundle project `com.ibm.cicsdev.wlp.restapp.cicsbundle` from CICS Explorer to zFS using the **Export Bundle Project to z/OS UNIX File System** wizard.  The samples use the sub-directory `com.ibm.cicsdev.restapp.cicsbundle_1.0.0`.
+### CICS Explorer SDK Deployment
 
-### Installing into CICS
+1. Import the `cics-java-liberty-restapp-cicsbundle-eclipse` project into Eclipse: right-click the folder in Project Explorer → **Import as Project**
+2. Build the application WAR in Eclipse using Gradle or Maven (see Option 2 above)
+3. Right-click `cics-java-liberty-restapp-cicsbundle-eclipse` → **Export Bundle Project to z/OS UNIX File System**
+4. The bundle is exported to the `cics-java-liberty-restapp-bundle_1.0.0` directory on zFS
+5. In CICS, create and install a BUNDLE resource definition pointing to that zFS directory
 
-1. In CICS, create a BUNDLE resource definition, setting the bundle directory attribute to the zFS location you just exported to, and install it. 
-**Note:** A sample DFHCSDUP input file for the required CICS BUNDLE resource definition is supplied in the supporting file [DFHCSD.txt](etc/DFHCSD.txt) file.  
-1. Download and compile the supplied COBOL program `EDUCHAN` and deploy into CICS.
+### Direct Liberty Application Deployment
 
-
-
+1. Build the WAR using Gradle or Maven
+2. Upload the WAR file to zFS
+3. Add a `<webApplication>` element to your Liberty `server.xml` pointing to the WAR location
+4. Restart or update the JVM server
 
 ## Running the Sample
 
-### Using a web browser you can issue the following HTTP GET requests
+Once deployed, use the context root `cics-java-liberty-restapp`. Issue the following HTTP GET requests:
 
-* http://host:port/com.ibm.cicsdev.restapp/rest/cicsinfo
+**Get CICS environment information:**
+```
+http://host:port/cics-java-liberty-restapp/rest/cicsinfo
+```
+Example response:
+```json
+{"applid":"IYK2Z32E","jvmServer":"DFHWLP","time":"2016-09-09T16:19:55.384Z","cicsEnvironment":{"cicsProduct":"CICS Transaction Server for z/OS","cicsVersion":"5.3.0"}}
+```
 
-This will invoke the `InfoResource` class and return the following JSON response with information about the target CICS system:
+**Reverse the default string "Hello from Java":**
+```
+http://host:port/cics-java-liberty-restapp/rest/reverse
+```
+Example response:
+```json
+{"time":"2016-09-09T16:15:52.756Z","original":"Hello from Java","reverse":"avaJ morf olleH","truncated":false}
+```
 
-`{"applid":"IYK2Z32E","jvmServer":"DFHWLP","time":"2016-09-09T16:19:55.384Z","cicsEnvironment":{"cicsProduct":"CICS Transaction Server for z/OS","cicsVersion":"5.3.0"}}`
-
-
-* http://host:port/com.ibm.cicsdev.restapp/rest/reverse
-
-This will invoke the `ReverseResource` class which links to the CICS COBOL program and reverses the default string "Hello from Java" returning the following JSON response:
-
-`{"time":"2016-09-09T16:15:52.756Z","original":"Hello from Java","reverse":"avaJ morf olleH","truncated":false}`
-
-
-* http://host:port/com.ibm.cicsdev.restapp/rest/reverse/ilovecics
-
-This will invoke the `ReverseResource` class which links to the CICS COBOL program reversing the input string "ilovecics" as follows:
-
-`{"time":"2016-09-09T16:15:32.466Z","original":"ilovecics","reverse":"scicevoli","truncated":false}`
+**Reverse a custom string:**
+```
+http://host:port/cics-java-liberty-restapp/rest/reverse/ilovecics
+```
+Example response:
+```json
+{"time":"2016-09-09T16:15:32.466Z","original":"ilovecics","reverse":"scicevoli","truncated":false}
+```
 
 ## License
-This project is licensed under [Apache License Version 2.0](LICENSE).
 
-## Usage terms
-By downloading, installing, and/or using this sample, you acknowledge that separate license terms may apply to any dependencies that might be required as part of the installation and/or execution and/or automated build of the sample, including the following IBM license terms for relevant IBM components:
+This project is licensed under the [Eclipse Public License Version 2.0](LICENSE).
 
-• IBM CICS development components terms: https://www.ibm.com/support/customer/csol/terms/?id=L-ACRR-BBZLGX
+## Additional Resources
 
+- [cics-java-liberty-restappext](https://github.com/cicsdev/cics-java-liberty-restappext) — extended code examples for accessing CICS resources from Java
+- [IBM CICS documentation](https://www.ibm.com/docs/en/cics-ts)
+
+## Contributing
+
+We welcome contributions. Please raise issues and pull requests in the [GitHub repository](https://github.com/cicsdev/cics-java-liberty-restapp).

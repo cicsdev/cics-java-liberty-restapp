@@ -7,8 +7,7 @@ plugins
 
 }
 
-group = 'com.ibm.cicsdev.restapp'
-archivesBaseName='cics-java-liberty-restapp'
+group = 'com.ibm.cicsdev'
 version = '0.1.0'
 
 java {
@@ -17,10 +16,15 @@ java {
     }
 }
 
-// If in Eclipse, add Javadoc to the local project classpath
-eclipse 
+war
 {
-    classpath 
+    archiveFileName = 'cics-java-liberty-restapp.war'
+}
+
+// If in Eclipse, add Javadoc to the local project classpath
+eclipse
+{
+    classpath
     {
         downloadJavadoc = true
     }

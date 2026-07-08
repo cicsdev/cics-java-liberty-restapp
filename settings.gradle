@@ -1,4 +1,12 @@
 // ============================================================================
+// Toolchain Configuration
+// ============================================================================
+// Configure toolchain resolver for auto-provisioning of JDKs
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+// ============================================================================
 // Root Project Configuration
 // ============================================================================
 rootProject.name = 'cics-java-liberty-restapp'
@@ -7,4 +15,4 @@ rootProject.name = 'cics-java-liberty-restapp'
 // Subprojects
 // ============================================================================
 include(':cics-java-liberty-restapp-app')
-include(':cics-java-liberty-restapp-bundle')
+include(':cics-java-liberty-restapp-cicsbundle')

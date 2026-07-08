@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>cics-java-liberty-restapp-bundle</artifactId>
+    <artifactId>cics-java-liberty-restapp-cicsbundle</artifactId>
     <name>CICS Enterprise Java Program - CICS Bundle</name>
 
     <packaging>cics-bundle</packaging>
@@ -28,7 +28,7 @@
             <plugin>
                 <groupId>com.ibm.cics</groupId>
                 <artifactId>cics-bundle-maven-plugin</artifactId>
-                <version>1.0.7</version>
+                <version>1.0.8</version>
                 <extensions>true</extensions>
 
                 <configuration>

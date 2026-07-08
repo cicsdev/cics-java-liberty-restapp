@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Sample Liberty server.xml for cics-java-liberty-restapp.
+
+    This sample uses the javax.* namespace (Java EE 8).
+    Do NOT use Jakarta EE 10 features (restfulWS-3.1, servlet-6.0) —
+    they are incompatible with the javax.* API used in this sample.
+-->
+<server description="CICS Liberty JVM server">
+
+    <featureManager>
+        <!-- JAX-RS 2.1 provides the javax.ws.rs API used by this sample -->
+        <feature>jaxrs-2.1</feature>
+        <!-- Servlet 4.0 is the Java EE 8 servlet container -->
+        <feature>servlet-4.0</feature>
+    </featureManager>
+
+</server>
