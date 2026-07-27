@@ -21,6 +21,7 @@
 		<java.version>8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<cics.jvmserver>DFHWLP</cics.jvmserver>
+		<cics.bom.version>5.5-20250513205735-PH63882</cics.bom.version>
 	</properties>
 
 	<!-- CICS TS V5.5 BOM (as of May 2020) -->
@@ -29,7 +30,7 @@
 			<dependency>
 				<groupId>com.ibm.cics</groupId>
 				<artifactId>com.ibm.cics.ts.bom</artifactId>
-				<version>5.5-20250513205735-PH63882</version>
+				<version>${cics.bom.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

@@ -1,0 +1,10 @@
+DELEGATES_PREFERENCE=delegateValidatorList
+USER_BUILD_PREFERENCE=enabledBuildValidatorList
+USER_MANUAL_PREFERENCE=enabledManualValidatorList
+USER_PREFERENCE=overrideGlobalPreferencestruedisableAllValidationfalseversion1.3.100.v202407180051
+disabled=06target
+eclipse.preferences.version=1
+override=true
+suspend=false
+vals/org.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator/global=FF
+vf.version=3
